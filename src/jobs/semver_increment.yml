@@ -1,0 +1,13 @@
+description: >
+  Sample description
+
+executor: default
+
+parameters:
+  level:
+    description: "Update level [M/m/p] for Major/minor/patch"
+    type: string
+    default: "p"
+steps:
+  - semver-increment:
+      level: << parameters.level >>

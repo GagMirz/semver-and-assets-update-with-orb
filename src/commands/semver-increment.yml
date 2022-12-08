@@ -1,0 +1,32 @@
+# description: >
+#   This command echos "Hello World" using file inclusion.
+# # What will this command do?
+# # Descriptions should be short, simple, and clear.
+# parameters:
+#   to:
+#     type: string
+#     default: "World"
+#     description: "Hello to whom?"
+# steps:
+#   - run:
+#       environment:
+#         PARAM_TO: <<parameters.to>>
+#       name: Hello Greeting
+#       command: <<include(scripts/greet.sh)>>
+
+# set-new-version-tag:
+description: "Get Semver tag via github API, update via version_increment.sh and export VERSION variable"
+parameters:
+  level:
+    description: "Update level [M/m/p] for Major/minor/patch"
+    type: string
+    default: "p"
+steps:
+  - run:
+      name: "SemVer version increment"
+      command: |
+        option=<< parameters.level >>
+        version=`curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest -s | jq .name -r` &&
+        << include(scripts/semver_increment.sh) >>
+        echo "export VERSION=${version}" >> "$BASH_ENV"
+
