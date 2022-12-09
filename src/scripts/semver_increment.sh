@@ -32,14 +32,14 @@ fi
 echo 5
 echo ${a[0]}
 echo ${a[1]}
-echo ${((a[2]++))}
+echo ${a[2]}
 echo ${major}
 echo ${minor}
 echo ${patch}
 # shellcheck disable=SC2236
 if [ ! -z $patch ]; then
   echo 5.1
-  ((a[2]++))
+  ((a[2]=a[2]+1))
   echo 5.2
 fi
 echo 6
