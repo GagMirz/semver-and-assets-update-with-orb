@@ -38,6 +38,7 @@ echo ${minor}
 echo ${patch}
 # shellcheck disable=SC2236
 if [ ! -z $patch ]; then
+  echo 5.1
   ((a[2]++))
 fi
 echo 6
