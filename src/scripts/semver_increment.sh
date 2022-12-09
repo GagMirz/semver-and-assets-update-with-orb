@@ -3,7 +3,7 @@ echo 1
 # Increment a version string using Semantic Versioning terminology.
 
 option="<< parameters.level >>"
-version=<< parameters.version >>
+version='<< parameters.version >>'
 echo 2
 
 while read -r -n1 op; do
