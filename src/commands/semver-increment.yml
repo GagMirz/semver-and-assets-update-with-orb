@@ -24,5 +24,4 @@ parameters:
 steps:
   - run:
       name: "Calculate, increment and update new version into global variable"
-      command: |
-        << include(scripts/semver_increment.sh) >>
+      command: "<< include(scripts/semver_increment.sh) >>"
