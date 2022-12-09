@@ -9,6 +9,7 @@ while read -r -n1 op; do
     m ) minor=true;;
     p ) patch=true;;
   esac
+# shellcheck disable=SC2154
 done < <(echo -n "$option")
 echo 3
 
