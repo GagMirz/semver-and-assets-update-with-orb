@@ -8,4 +8,5 @@ usage:
   workflows:
     use-my-orb:
       jobs:
-        - semver/semver_increment
+        - semver/semver_increment:
+          exec: cibuilds/github:0.10
