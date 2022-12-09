@@ -1,7 +1,7 @@
 description: >
   Sample description
 
-executor: default
+# executor: default
 
 parameters:
   level:
