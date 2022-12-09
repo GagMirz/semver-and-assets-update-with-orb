@@ -18,7 +18,7 @@ echo 3
 # shellcheck disable=SC2236
 if [ ! -z $major ]; then
   vFlag="v"
-  ((a[0]++))
+  ((a[0]=a[0]+1))
   a[1]=0
   a[2]=0
 fi
@@ -26,24 +26,14 @@ echo 4
 
 # shellcheck disable=SC2236
 if [ ! -z $minor ]; then
-  ((a[1]++))
+  ((a[1]=a[1]+1))
   a[2]=0
 fi
-echo 5
-echo ${a[0]}
-echo ${a[1]}
-echo ${a[2]}
-echo ${major}
-echo ${minor}
-echo ${patch}
+
 # shellcheck disable=SC2236
 if [ ! -z $patch ]; then
-  echo 5.1
   ((a[2]=a[2]+1))
-  echo 5.2
 fi
-echo 6
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
-echo "${version}"
 echo "export VERSION=${version}" >> "$BASH_ENV"
