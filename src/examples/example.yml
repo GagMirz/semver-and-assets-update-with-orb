@@ -9,4 +9,4 @@ usage:
     use-my-orb:
       jobs:
         - semver/semver_increment:
-          exec: cibuilds/github:0.10
+            exec: cibuilds/github:0.10
