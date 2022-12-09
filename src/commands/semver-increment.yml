@@ -23,10 +23,6 @@ parameters:
     default: "p"
 steps:
   - run:
-      name: "SemVer version increment"
+      name: "Calculate, increment and update new version into global variable"
       command: |
-        option=<< parameters.level >>
-        version=`<< include(scripts/get_version.sh) >>`
         << include(scripts/semver_increment.sh) >>
-        echo "export VERSION=${version}" >> "$BASH_ENV"
-

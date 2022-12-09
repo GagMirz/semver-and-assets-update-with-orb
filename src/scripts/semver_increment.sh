@@ -2,6 +2,9 @@
 
 # Increment a version string using Semantic Versioning terminology.
 
+option="-<< parameters.level >>"
+version=`curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest -s | jq .name -r`
+
 while $option ":Mmp" op
 do
   case $op in
@@ -36,3 +39,4 @@ if [ ! -z $patch ]; then
 fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
+echo "export VERSION=${version}" >> "$BASH_ENV"
