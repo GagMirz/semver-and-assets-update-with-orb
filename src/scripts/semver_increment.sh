@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Increment a version string using Semantic Versioning terminology.
 
 option="<< parameters.level >>"
