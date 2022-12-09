@@ -3,7 +3,6 @@
 # Increment a version string using Semantic Versioning terminology.
 
 option="<< parameters.level >>"
-# shellcheck disable=SC2086
 version="<< parameters.version >>"
 
 while read -r -n1 op; do
@@ -13,11 +12,6 @@ while read -r -n1 op; do
     p ) patch=true;;
   esac
 done < <(echo -n "$option")
-
-# shellcheck disable=SC2086
-if [ -z $version ]; then
-  version="0.0.0"
-fi
 
 # shellcheck disable=SC2206 
 a=( ${version//./ } )
