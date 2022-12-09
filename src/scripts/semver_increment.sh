@@ -12,9 +12,9 @@ while read -n1 op; do
     m ) minor=true;;
     p ) patch=true;;
   esac
-  echo $op 
 done < <(echo -n "$option")
 
+# shellcheck disable=SC2086
 if [ -z $version ]; then
   version="0.0.0"
 fi
