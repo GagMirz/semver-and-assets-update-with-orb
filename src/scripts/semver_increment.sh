@@ -33,6 +33,9 @@ echo 5
 echo ${a[0]}
 echo ${a[1]}
 echo ${a[2]+1}
+echo ${major}
+echo ${minor}
+echo ${patch}
 # shellcheck disable=SC2236
 if [ ! -z $patch ]; then
   ((a[2]++))
