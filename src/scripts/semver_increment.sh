@@ -40,6 +40,7 @@ echo ${patch}
 if [ ! -z $patch ]; then
   echo 5.1
   ((a[2]++))
+  echo 5.2
 fi
 echo 6
 
