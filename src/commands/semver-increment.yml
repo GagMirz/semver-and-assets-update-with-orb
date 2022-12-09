@@ -1,0 +1,21 @@
+# set-new-version-tag:
+description: "Get Semver tag via github API, update via version_increment.sh and export VERSION variable"
+parameters:
+  level:
+    description: "Update level [M/m/p] for Major/minor/patch"
+    type: string
+    default: "p"
+  version:
+    description: "Semver version string"
+    type: string
+    default: "v0.0.0"
+steps:
+  - run:
+      name: "Add level to env"
+      command: echo "export option=<< parameters.level >>" >> "$BASH_ENV"
+  - run:
+      name: "Add version to env"
+      command: echo "export version=<< parameters.version >>" >> "$BASH_ENV"
+  - run:
+      name: "Calculate, increment and update new version into global variable"
+      command: "<< include(scripts/semver_increment.sh) >>"

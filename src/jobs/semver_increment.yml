@@ -1,0 +1,22 @@
+description: >
+  You have to specify executor to use this job within your environment.
+
+parameters:
+  exec:
+    description: "Executor within which update will be done"
+    type: executor
+  level:
+    description: "Update level [M/m/p] for Major/minor/patch"
+    type: string
+    default: "p"
+  version:
+    description: "Semver version string"
+    type: string
+    default: "v0.0.0"
+
+executor: << parameters.exec >>
+
+steps:
+  - semver-increment:
+      level: << parameters.level >>
+      version: << parameters.version >>
