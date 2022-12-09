@@ -26,15 +26,14 @@ if [ ! -z $major ]; then
   a[1]=0
   a[2]=0
 fi
-echo 5
-echo a[1]
-echo ${a[1]}
-echo a[2]
-echo ${a[2]}
+
 # shellcheck disable=SC2236
 if [ ! -z $minor ]; then
+  echo 4.1
   ((a[1]++))
+  echo 4.2
   a[2]=0
+  echo 4.3
 fi
 echo 6
 
