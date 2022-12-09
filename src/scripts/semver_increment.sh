@@ -2,36 +2,36 @@
 
 # Increment a version string using Semantic Versioning terminology.
 
-while getopts ":Mmp" option
+while $option ":Mmp" op
 do
-  case $Option in
+  case $op in
     M ) major=true;;
     m ) minor=true;;
     p ) patch=true;;
   esac
 done
 
-if [ -z $version ]; then
+if [ -n "${version}" ]; then
   version="0.0.0"
 fi
 
-# Build array from version string.
+# shellcheck disable=SC2206 
 a=( ${version//./ } )
 
 # Increment version numbers as requested.
-if [ ! -z $major ]; then
+if [ ! -n $major ]; then
   vFlag="v"
   ((a[0]++))
   a[1]=0
   a[2]=0
 fi
 
-if [ ! -z $minor ]; then
+if [ ! -n $minor ]; then
   ((a[1]++))
   a[2]=0
 fi
 
-if [ ! -z $patch ]; then
+if [ ! -n $patch ]; then
   ((a[2]++))
 fi
 
