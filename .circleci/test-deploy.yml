@@ -56,6 +56,7 @@ jobs:
       - run:
           name: "Should add Major and reset Minor, Patch, add Minor, add Patch"
           command:  |
+            echo $VERSION
             [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 139
 workflows:
   test-deploy:
