@@ -30,7 +30,9 @@ if [ ! -z $minor ]; then
   a[2]=0
 fi
 echo 5
-
+echo ${a[0]}
+echo ${a[1]}
+echo ${a[2]}
 # shellcheck disable=SC2236
 if [ ! -z $patch ]; then
   ((a[2]++))
