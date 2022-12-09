@@ -1,7 +1,6 @@
 version: 2.1
 
-description: >
-  Get Semver tag via github API, update via version_increment.sh and export VERSION variable
+description: "Get Semver tag via github API, update via version_increment.sh and export VERSION variable"
 
 display:
   # home_url: "https://www.example.com/docs"
