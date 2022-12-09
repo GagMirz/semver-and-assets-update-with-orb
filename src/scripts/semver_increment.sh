@@ -1,6 +1,6 @@
 #!/bin/bash
 # Increment a version string using Semantic Versioning terminology.
-
+echo 1
 # shellcheck disable=SC2154
 while read -r -n1 op; do
   case $op in
@@ -9,9 +9,11 @@ while read -r -n1 op; do
     p ) patch=true;;
   esac
 done < <(echo -n "$option")
+echo 2
 
 # shellcheck disable=SC2206 
 a=( ${version//./ } )
+echo 3
 
 # shellcheck disable=SC2236
 if [ ! -z $major ]; then
@@ -20,17 +22,20 @@ if [ ! -z $major ]; then
   a[1]=0
   a[2]=0
 fi
+echo 4
 
 # shellcheck disable=SC2236
 if [ ! -z $minor ]; then
   ((a[1]++))
   a[2]=0
 fi
+echo 5
 
 # shellcheck disable=SC2236
 if [ ! -z $patch ]; then
   ((a[2]++))
 fi
+echo 6
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
 echo "export VERSION=${version}" >> "$BASH_ENV"
