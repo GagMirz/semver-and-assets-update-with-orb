@@ -22,19 +22,19 @@ fi
 a=( ${version//./ } )
 
 # Increment version numbers as requested.
-if [ -n $major ]; then
+if [ -n "{$major}" ]; then
   vFlag="v"
   ((a[0]++))
   a[1]=0
   a[2]=0
 fi
 
-if [ -n $minor ]; then
+if [ -n "{$minor}" ]; then
   ((a[1]++))
   a[2]=0
 fi
 
-if [ -n $patch ]; then
+if [ -n "{$patch}" ]; then
   ((a[2]++))
 fi
 
