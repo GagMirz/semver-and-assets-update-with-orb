@@ -16,7 +16,6 @@ done < <(echo -n "$option")
 # shellcheck disable=SC2206 
 a=( ${version//./ } )
 
-# Increment version numbers as requested.
 # shellcheck disable=SC2236
 if [ ! -z $major ]; then
   vFlag="v"
@@ -37,4 +36,5 @@ if [ ! -z $patch ]; then
 fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
-# echo "export VERSION=${version}" >> "$BASH_ENV"
+echo "export VERSION=${version}" >> "$BASH_ENV"
+echo $version
