@@ -13,7 +13,7 @@ done < <(echo -n "$option")
 # shellcheck disable=SC2206 
 a=( ${version//./ } )
 echo "${version}"
-echo ${a[0]}
+echo "${a[0]}"
 
 # shellcheck disable=SC2236
 if [ ! -z $major ]; then
