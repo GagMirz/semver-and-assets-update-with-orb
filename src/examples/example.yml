@@ -1,13 +1,12 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  Sample example of semver tag update, new semver value will be in $VERSION.
+
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    semver: tmo-orb/semver@latest
   workflows:
     use-my-orb:
       jobs:
-        - <orb-name>/<job-name>
+        - semver/semver_increment:
+            exec: cibuilds/github:0.10
