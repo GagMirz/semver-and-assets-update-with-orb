@@ -28,14 +28,14 @@ jobs:
       - run:
           name: "Should add Minor and reset Patch"
           command:  |
-            [[ $VERSION == "v0.1.0" ]] && echo "Patch added" || exit 134
+            [[ $VERSION == "v0.1.0" ]] && echo "Patch added" || exit 135
       - semver/semver-increment:
-          level: "m"
+          level: "M"
           version: "v0.1.1"
       - run:
           name: "Should add Major and reset Minor, Patch"
           command:  |
-            [[ $VERSION == "v1.0.0" ]] && echo "Patch added" || exit 134
+            [[ $VERSION == "v1.0.0" ]] && echo "Patch added" || exit 136
 workflows:
   test-deploy:
     jobs:
