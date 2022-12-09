@@ -29,9 +29,11 @@ fi
 
 # shellcheck disable=SC2236
 if [ ! -z $minor ]; then
+  echo ${a[0]}
+  echo ${a[1]}
+  echo ${a[2]}
   echo 4.1
-  # ((a[1]++))
-  a[1]=a[1]+1
+  ((a[1]++))
   echo 4.2
   a[2]=0
   echo 4.3
