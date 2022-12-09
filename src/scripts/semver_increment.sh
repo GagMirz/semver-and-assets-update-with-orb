@@ -5,14 +5,14 @@
 option="<< parameters.level >>"
 version=`curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest -s | jq .name -r`
 
-while $option ":Mmp" op
-do
+while read -n1 op; do
   case $op in
     M ) major=true;;
     m ) minor=true;;
     p ) patch=true;;
   esac
-done
+  echo $op 
+done < <(echo -n "$option")
 
 if [ -z $version ]; then
   version="0.0.0"
