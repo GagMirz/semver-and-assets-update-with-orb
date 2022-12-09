@@ -15,8 +15,27 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
-      # Run your orb's commands to validate them.
-      - semver/semver-increment
+      - semver/semver-increment:
+          level: "p"
+          version: "v0.0.0"
+      - run:
+          name: "Should add Patch"
+          command:  |
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 134"
+      - semver/semver-increment:
+          level: "m"
+          version: "v0.0.1"
+      - run:
+          name: "Should add Minor and reset Patch"
+          command:  |
+            [[ $VERSION == "v0.1.0" ]] && echo "Patch added" || exit 134"
+      - semver/semver-increment:
+          level: "m"
+          version: "v0.1.1"
+      - run:
+          name: "Should add Major and reset Minor, Patch"
+          command:  |
+            [[ $VERSION == "v1.0.0" ]] && echo "Patch added" || exit 134"
 workflows:
   test-deploy:
     jobs:
