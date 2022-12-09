@@ -28,9 +28,9 @@ if [ ! -z $major ]; then
 fi
 echo 5
 echo a[1]
-echo $a[1]
+echo ${a}[1]
 echo a[2]
-echo $a[2]
+echo ${a}[2]
 # shellcheck disable=SC2236
 if [ ! -z $minor ]; then
   ((a[1]++))
