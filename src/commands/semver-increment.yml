@@ -26,7 +26,7 @@ steps:
       name: "SemVer version increment"
       command: |
         option=<< parameters.level >>
-        version=`curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest -s | jq .name -r` &&
+        version=`<< include(scripts/get_version.sh) >>`
         << include(scripts/semver_increment.sh) >>
         echo "export VERSION=${version}" >> "$BASH_ENV"
 
