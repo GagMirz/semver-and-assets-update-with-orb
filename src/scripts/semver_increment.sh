@@ -3,13 +3,13 @@ echo 1
 # Increment a version string using Semantic Versioning terminology.
 echo 2
 
+# shellcheck disable=SC2154
 while read -r -n1 op; do
   case $op in
     M ) major=true;;
     m ) minor=true;;
     p ) patch=true;;
   esac
-# shellcheck disable=SC2154
 done < <(echo -n "$option")
 echo 3
 
