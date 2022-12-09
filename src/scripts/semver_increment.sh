@@ -2,7 +2,7 @@
 
 # Increment a version string using Semantic Versioning terminology.
 
-option="-<< parameters.level >>"
+option="<< parameters.level >>"
 version=`curl https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest -s | jq .name -r`
 
 while $option ":Mmp" op
@@ -14,7 +14,7 @@ do
   esac
 done
 
-if [ -n "${version}" ]; then
+if [ -z $version ]; then
   version="0.0.0"
 fi
 
@@ -22,19 +22,22 @@ fi
 a=( ${version//./ } )
 
 # Increment version numbers as requested.
-if [ -n "{$major}" ]; then
+# shellcheck disable=SC2236
+if [ ! -z $major ]; then
   vFlag="v"
   ((a[0]++))
   a[1]=0
   a[2]=0
 fi
 
-if [ -n "{$minor}" ]; then
+# shellcheck disable=SC2236
+if [ ! -z $minor ]; then
   ((a[1]++))
   a[2]=0
 fi
 
-if [ -n "{$patch}" ]; then
+# shellcheck disable=SC2236
+if [ ! -z $patch ]; then
   ((a[2]++))
 fi
 
