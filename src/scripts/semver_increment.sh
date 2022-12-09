@@ -45,4 +45,5 @@ fi
 echo 6
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
+echo "${version}"
 echo "export VERSION=${version}" >> "$BASH_ENV"
