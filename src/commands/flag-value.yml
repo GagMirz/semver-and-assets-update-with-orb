@@ -4,23 +4,23 @@ parameters:
   text:
     description: "String, containing flag and value"
     type: string
-  flag_name:
+  flag:
     description: "Flag name which value need to be retrieved"
     type: string
-  answer_variable:
+  answer:
     description: "Variable name for response value"
     type: string
     default: "FLAG_VALUE"
 steps:
   - run:
-      name: "Add flag_name to env"
-      command: echo "export flag_name=<< parameters.level >>" >> "$BASH_ENV"
+      name: "Add text to env"
+      command: echo "export text=<< parameters.text >>" >> "$BASH_ENV"
   - run:
       name: "Add flag name to env"
-      command: echo "export answer_variable=<< parameters.flag_name >>" >> "$BASH_ENV"
+      command: echo "export flag=<< parameters.flag >>" >> "$BASH_ENV"
   - run:
-      name: "Add version to env"
-      command: echo "export answer_variable=<< parameters.answer_variable >>" >> "$BASH_ENV"
+      name: "Add answers variable name to env"
+      command: echo "export answer=<< parameters.answer >>" >> "$BASH_ENV"
   - run:
       name: "Get given flag value from a string"
       command: "<< include(scripts/flag_value.sh) >>"

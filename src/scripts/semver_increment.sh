@@ -37,4 +37,4 @@ if [ ! -z $patch ]; then
 fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
-echo "export ${answer_variable}=${version}" >> "$BASH_ENV"
+echo "export ${answer}=${version}" >> "$BASH_ENV"
