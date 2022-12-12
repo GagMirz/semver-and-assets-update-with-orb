@@ -16,9 +16,6 @@ steps:
       name: "Add text to env"
       command: echo "export text='<< parameters.text >>'" >> "$BASH_ENV"
   - run:
-      name: "echoing text"
-      command: echo << parameters.text >>
-  - run:
       name: "Add flag name to env"
       command: echo "export flag='<< parameters.flag >>'" >> "$BASH_ENV"
   - run:
@@ -27,3 +24,6 @@ steps:
   - run:
       name: "Get given flag value from a string"
       command: "<< include(scripts/flag_value.sh) >>"
+  - run:
+      name: "echo flag value"
+      command: "echo $FLAG_VALUE"
