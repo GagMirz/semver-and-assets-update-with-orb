@@ -12,17 +12,19 @@ done < <(echo -n "$option")
 
 # shellcheck disable=SC2206 
 a=( ${version//./ } )
-echo "${version}"
-echo "${a[0]}"
+
+if [ ${a[0]:0:1} == "v" ]; then
+  a[0]=${a[0]:1}
+  vFlag="v"
+fi
 
 # shellcheck disable=SC2236
 if [ ! -z $major ]; then
-  vFlag="v"
   ((a[0]=a[0]+1))
   a[1]=0
   a[2]=0
 fi
-echo ${a[0]}
+
 # shellcheck disable=SC2236
 if [ ! -z $minor ]; then
   ((a[1]=a[1]+1))
