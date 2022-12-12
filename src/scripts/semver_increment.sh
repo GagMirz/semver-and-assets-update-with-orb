@@ -37,6 +37,7 @@ if [ ! -z $patch ]; then
 fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
-echo version
+echo $version
+# shellcheck disable=SC2154
 echo "export ${answer}=${version}"
 echo "export ${answer}=${version}" >> "$BASH_ENV"
