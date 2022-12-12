@@ -1,5 +1,6 @@
 # set-new-version-tag:
 description: "Get Semver tag via github API, update via version_increment.sh and export VERSION variable"
+
 parameters:
   level:
     description: "Update level [M/m/p] for Major/minor/patch"
@@ -13,6 +14,7 @@ parameters:
     description: "Variable name for response value"
     type: string
     default: "VERSION"
+
 steps:
   - run:
       name: "Add level to env"

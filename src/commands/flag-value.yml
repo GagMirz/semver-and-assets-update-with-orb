@@ -1,5 +1,6 @@
 # set-new-version-tag:
 description: "Get flag value from a string, works withy python and regex"
+
 parameters:
   text:
     description: "String, containing flag and value"
@@ -11,6 +12,7 @@ parameters:
     description: "Variable name for response value"
     type: string
     default: "FLAG_VALUE"
+
 steps:
   - run:
       name: "Add text to env"
@@ -24,6 +26,3 @@ steps:
   - run:
       name: "Get given flag value from a string"
       command: "<< include(scripts/flag_value.sh) >>"
-  - run:
-      name: "echo flag value"
-      command: "echo $FLAG_VALUE"
