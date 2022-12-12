@@ -1,6 +1,7 @@
 #!/bin/bash
 
-PYTHONIOENCODING=utf8
+export PYTHONIOENCODING=utf8
+# shellcheck disable=SC2154
 PULL_REQUEST_BASE_REF=$(python3 -c "import sys, json, re; \
 title=sys.argv[1]; \
 matches=re.findall( \
