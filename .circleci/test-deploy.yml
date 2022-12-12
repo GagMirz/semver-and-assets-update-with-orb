@@ -62,7 +62,7 @@ jobs:
 
       # Flag Value tests
       - semver/flag-value:
-          text: 'Test text with -r argument -d otherArgument'
+          text: 'Test text with \-r argument \-d otherArgument'
           flag: "r"
       - run:
           name: "Should retrieve argument of -r flag"
