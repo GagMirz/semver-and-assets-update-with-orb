@@ -9,6 +9,10 @@ parameters:
     description: "Semver version string"
     type: string
     default: "v0.0.0"
+  answer_variable:
+    description: "Variable name for response value"
+    type: string
+    default: "VERSION"
 steps:
   - run:
       name: "Add level to env"
@@ -16,6 +20,9 @@ steps:
   - run:
       name: "Add version to env"
       command: echo "export version=<< parameters.version >>" >> "$BASH_ENV"
+  - run:
+      name: "Add answer variable to env"
+      command: echo "export answer_variable=<< parameters.answer_variable >>" >> "$BASH_ENV"
   - run:
       name: "Calculate, increment and update new version into global variable"
       command: "<< include(scripts/semver_increment.sh) >>"

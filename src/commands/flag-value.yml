@@ -1,0 +1,26 @@
+# set-new-version-tag:
+description: "Get flag value from a string, works withy python and regex"
+parameters:
+  text:
+    description: "String, containing flag and value"
+    type: string
+  flag_name:
+    description: "Flag name which value need to be retrieved"
+    type: string
+  answer_variable:
+    description: "Variable name for response value"
+    type: string
+    default: "FLAG_VALUE"
+steps:
+  - run:
+      name: "Add flag_name to env"
+      flag_name: echo "export flag_name=<< parameters.level >>" >> "$BASH_ENV"
+  - run:
+      name: "Add flag name to env"
+      command: echo "export answer_variable=<< parameters.flag_name >>" >> "$BASH_ENV"
+  - run:
+      name: "Add version to env"
+      command: echo "export answer_variable=<< parameters.answer_variable >>" >> "$BASH_ENV"
+  - run:
+      name: "Get given flag value from a string"
+      command: "<< include(scripts/flag_value.sh) >>"

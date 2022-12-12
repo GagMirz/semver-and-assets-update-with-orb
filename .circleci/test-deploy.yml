@@ -15,9 +15,8 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
-      - semver/semver-increment:
-          level: "p"
-          version: "v0.0.0"
+
+      # SemVer update tests
       - run:
           name: "Should add Patch"
           command:  |
@@ -58,6 +57,16 @@ jobs:
           command:  |
             echo $VERSION
             [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 139
+
+      # Flag Value tests
+      - semver/flag-value:
+          text: "Test text with -r argument -d otherArgument"
+          flag_name: "r"
+      - run:
+          name: "Should retrieve argument of -r flag"
+          command:  |
+            echo $FLAG_VALUE
+            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 140
 workflows:
   test-deploy:
     jobs:
