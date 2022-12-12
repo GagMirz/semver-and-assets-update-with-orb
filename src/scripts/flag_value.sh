@@ -1,8 +1,11 @@
 #!/bin/bash
 
 export PYTHONIOENCODING=utf8
+# shellcheck disable=SC2154
 echo "${text}"
+# shellcheck disable=SC2154
 echo "${flag}"
+# shellcheck disable=SC2154
 echo "${answer}"
 # shellcheck disable=SC2154
 PULL_REQUEST_BASE_REF=$(python3 -c "import sys, json, re; \
