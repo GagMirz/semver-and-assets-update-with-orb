@@ -15,8 +15,10 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
-
       # SemVer update tests
+      - semver/semver-increment:
+          level: "p"
+          version: "v0.0.0"
       - run:
           name: "Should add Patch"
           command:  |
