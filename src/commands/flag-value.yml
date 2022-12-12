@@ -12,7 +12,7 @@ parameters:
     type: string
     default: "FLAG_VALUE"
 steps:
-  - run: shellcheck -e SC2154 scripts/flag_value.sh
+  - run: export SHELLCHECK_OPTS="-e SC2154"
   - run:
       name: "Add text to env"
       command: echo "export text='<< parameters.text >>'" >> "$BASH_ENV"
