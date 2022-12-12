@@ -1,5 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2154
+# SC2154 justification: Variable assigned outside of script file.
 
 export PYTHONIOENCODING=utf8
 
