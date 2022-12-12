@@ -20,10 +20,10 @@ steps:
       command: echo << parameters.text >>
   - run:
       name: "Add flag name to env"
-      command: echo "export flag=<< parameters.flag >>" >> "$BASH_ENV"
+      command: echo "export flag='<< parameters.flag >>'" >> "$BASH_ENV"
   - run:
       name: "Add answers variable name to env"
-      command: echo "export answer=<< parameters.answer >>" >> "$BASH_ENV"
+      command: echo "export answer='<< parameters.answer >>'" >> "$BASH_ENV"
   - run:
       name: "Get given flag value from a string"
       command: "<< include(scripts/flag_value.sh) >>"

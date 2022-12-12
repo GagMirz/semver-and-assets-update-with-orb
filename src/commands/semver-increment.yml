@@ -16,13 +16,13 @@ parameters:
 steps:
   - run:
       name: "Add level to env"
-      command: echo "export option=<< parameters.level >>" >> "$BASH_ENV"
+      command: echo "export option='<< parameters.level >>'" >> "$BASH_ENV"
   - run:
       name: "Add version to env"
-      command: echo "export version=<< parameters.version >>" >> "$BASH_ENV"
+      command: echo "export version='<< parameters.version >>'" >> "$BASH_ENV"
   - run:
       name: "Add answers variable name to env"
-      command: echo "export answer=<< parameters.answer >>" >> "$BASH_ENV"
+      command: echo "export answer='<< parameters.answer >>'" >> "$BASH_ENV"
   - run:
       name: "Calculate, increment and update new version into global variable"
       command: "<< include(scripts/semver_increment.sh) >>"
