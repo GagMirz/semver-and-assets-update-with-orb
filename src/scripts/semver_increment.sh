@@ -13,7 +13,7 @@ done < <(echo -n "$option")
 # shellcheck disable=SC2206 
 a=( ${version//./ } )
 
-if [ ${a[0]:0:1} == "v" ]; then
+if [ "${a[0]:0:1}" == "v" ]; then
   a[0]=${a[0]:1}
   vFlag="v"
 fi
