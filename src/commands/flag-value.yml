@@ -14,7 +14,7 @@ parameters:
 steps:
   - run:
       name: "Add text to env"
-      command: echo "export text=<< parameters.text >>" >> "$BASH_ENV"
+      command: echo "export text='<< parameters.text >>'" >> "$BASH_ENV"
   - run:
       name: "echoing text"
       command: echo << parameters.text >>
