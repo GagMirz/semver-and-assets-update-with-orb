@@ -1,6 +1,6 @@
 #!/bin/bash
 # Increment a version string using Semantic Versioning terminology.
-
+echo "started"
 # shellcheck disable=SC2154
 while read -r -n1 op; do
   case $op in
