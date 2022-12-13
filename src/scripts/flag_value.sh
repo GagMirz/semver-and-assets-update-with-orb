@@ -8,7 +8,7 @@
 # Add default values
 [[ -z $text ]] && exit 128
 [[ -z $flag ]] && exit 128
-[[ -z $answer ]] && answer="FLAG"
+[[ -z $answer ]] && answer="FLAG_VALUE"
 
 export PYTHONIOENCODING=utf8
 
