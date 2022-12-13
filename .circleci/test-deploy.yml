@@ -154,8 +154,8 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "text='Test text with -r argument -d otherArgument'" > $config_path
-            echo "flag=r" >> $config_path
+            echo "text='Test text with -r argument -d otherArgument'" > /home/circleci/.new_utils.config
+            echo "flag=r" >> /home/circleci/.new_utils.config
             echo "answer=VALUE" >> /home/circleci/.new_utils.config
             cat /home/circleci/.new_utils.config
       - semver/flag-value:
