@@ -210,6 +210,18 @@ jobs:
           command:  |
             [[ ! -z "$MESSAGE" ]] && echo "Message in new MESSAGE variable" || exit 149
 
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "commit_hash=e472db1ca43eac2ad3baecf86e6ef02641b093e1" > $config_path
+      - semver/commit_message
+      - run:
+          name: "Should work with given commit"
+          command:  |
+            [[ $COMMIT_MESSAGE == 'feat: Initial commit.' ]] && echo "Message should be correct" || exit 150
+
+
+
 workflows:
   test-deploy:
     jobs:
