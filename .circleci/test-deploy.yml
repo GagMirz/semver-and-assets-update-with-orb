@@ -20,7 +20,7 @@ jobs:
           name: "Load parameters to env"
           command: |
             echo "version=v0.0.0" > /home/circleci/.utils.config
-            echo "level=p" >> /home/circleci/.utils.config
+            echo "option=p" >> /home/circleci/.utils.config
             echo "answer=VERSION" >> /home/circleci/.utils.config
       - semver/semver-increment
       - run: 
