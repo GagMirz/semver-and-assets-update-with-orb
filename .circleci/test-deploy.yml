@@ -221,6 +221,18 @@ jobs:
             echo $COMMIT_MESSAGE
             [[ $COMMIT_MESSAGE == 'feat: Initial commit.' ]] && echo "Message should be correct" || exit 150
 
+      # Read message from git commit 
+      # Exact checking with other repositories not possible (value is dynamic)
+      - run: 
+          name: "Emptying config file"
+          command: rm -rf $config_path
+
+      - semver/release_tag
+      - run:
+          name: "Should get release tag of repository"
+          command:  |
+            echo $TAG
+            [[ ! -z "$TAG" ]] && echo "Release Tag empty" || exit 149
 
 
 workflows:

@@ -1,0 +1,16 @@
+# set-new-version-tag:
+description: "Get release tag of given github repository default values are for current repository, should have installed ghr"
+
+parameters:
+  config_path:
+    description: "Path to configuration file to source, required configs username, repository, token, answer"
+    type: string
+    default: "/home/circleci/.utils.config"
+
+steps:
+  - run:
+      name: "Set env path"
+      command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
+  - run:
+      name: "Get given flag value from a string"
+      command: "<< include(scripts/release_tag.sh) >>"
