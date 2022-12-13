@@ -23,6 +23,9 @@ jobs:
             echo "level=p" >> /home/circleci/.utils.config
             echo "answer=VERSION" >> /home/circleci/.utils.config
       - semver/semver-increment
+      - run: 
+          name: "Read answer"
+          command: "echo $VERSION"
       - run:
           name: "Should add Patch"
           command:  |
