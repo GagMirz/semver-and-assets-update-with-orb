@@ -2,7 +2,7 @@
 description: "Get Semver tag via github API, update via version_increment.sh and export VERSION variable"
 
 parameters:
-  configs_path:
+  config_path:
     description: "Path to configuration file to source, required configs option, version"
     type: string
     default: "/home/circleci/.utils.config"
@@ -10,7 +10,7 @@ parameters:
 steps:
   - run:
       name: "Set env path"
-      command: echo `export config_path='<< parameters.configs_path >>'` >> "$BASH_ENV"
+      command: echo `export cnfg_p='<<parameters.config_path>>'` >> "$BASH_ENV"
   - run:
       name: "Calculate, increment and update new version into global variable"
       command: "<< include(scripts/semver_increment.sh) >>"
