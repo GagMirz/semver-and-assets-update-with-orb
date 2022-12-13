@@ -14,18 +14,9 @@ steps:
   - run:
       name: "Add default values if missing"
       command: |
-        if [ -z "$version" ];
-        then
-          version=v0.0.0
-        fi
-        if [ -z "$level" ];
-        then
-          level=p
-        fi
-        if [ -z "$answer" ];
-        then
-          answer=VERSION
-        fi
+        [[ -z $version ]] && version="v0.0.0"
+        [[ -z $level ]] && level="p"
+        [[ -z $answer ]] && answer="VERSION"
   - run:
       name: "Calculate, increment and update new version into global variable"
       command: "<< include(scripts/semver_increment.sh) >>"
