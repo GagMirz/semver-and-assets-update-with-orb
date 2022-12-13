@@ -46,7 +46,7 @@ fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
 export $vFlag
-export $a[0]
-export $a[1]
-export $a[2]
+export ${a[0]}
+export ${a[1]}
+export ${a[2]}
 echo "export ${answer}=${version}" >> "$BASH_ENV"
