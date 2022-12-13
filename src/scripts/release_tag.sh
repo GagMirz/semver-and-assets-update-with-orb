@@ -10,5 +10,5 @@
 [[ -z $token ]] && token="${GITHUB_TOKEN}"
 [[ -z $answer ]] && answer="TAG"
 
-tag=`curl https://api.github.com/repos/${username}/${repository}/releases/latest -s  --header \"Authorization\" $token"| jq .name -r`
+tag=`curl https://api.github.com/repos/${username}/${repository}/releases/latest -s  --header \"Authorization\" $token| jq .name -r`
 echo "export ${answer}=${tag}" >> "$BASH_ENV"
