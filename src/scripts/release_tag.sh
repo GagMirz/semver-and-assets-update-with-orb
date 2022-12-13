@@ -6,7 +6,7 @@
 
 # Add default values
 [[ -z $username ]] && username="${CIRCLE_PROJECT_USERNAME}"
-[[ -z $repository ]] && repo="${CIRCLE_PROJECT_REPONAME}"
+[[ -z $repository ]] && repository="${CIRCLE_PROJECT_REPONAME}"
 [[ -z $token ]] && token="${GITHUB_TOKEN}"
 [[ -z $answer ]] && answer="TAG"
 
