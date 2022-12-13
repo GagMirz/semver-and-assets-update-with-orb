@@ -131,9 +131,12 @@ jobs:
             [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 143
 
       # Flag Value tests
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "text='Test text with -r argument -d otherArgument' > /home/circleci/.utils.config
+            echo "flag=r" >> /home/circleci/.utils.config
       - semver/flag-value:
-          text: 'Test text with -r argument -d otherArgument'
-          flag: "r"
       - run:
           name: "Should retrieve argument of -r flag"
           command:  |

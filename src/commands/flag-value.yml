@@ -2,27 +2,15 @@
 description: "Get flag value from a string, works withy python and regex"
 
 parameters:
-  text:
-    description: "String, containing flag and value"
+  config_path:
+    description: "Path to configuration file to source, required configs option, version"
     type: string
-  flag:
-    description: "Flag name which value need to be retrieved"
-    type: string
-  answer:
-    description: "Variable name for response value"
-    type: string
-    default: "FLAG_VALUE"
+    default: "/home/circleci/.utils.config"
 
 steps:
   - run:
-      name: "Add text to env"
-      command: echo "export text='<< parameters.text >>'" >> "$BASH_ENV"
-  - run:
-      name: "Add flag name to env"
-      command: echo "export flag='<< parameters.flag >>'" >> "$BASH_ENV"
-  - run:
-      name: "Add answers variable name to env"
-      command: echo "export answer='<< parameters.answer >>'" >> "$BASH_ENV"
+      name: "Set env path"
+      command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
   - run:
       name: "Get given flag value from a string"
       command: "<< include(scripts/flag_value.sh) >>"
