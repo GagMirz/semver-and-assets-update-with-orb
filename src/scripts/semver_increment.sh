@@ -5,7 +5,7 @@
 # SC2206,SC2236 justification: Meaningless warning/error. 
 # shellcheck disable=all
 
-source $cnfp
+[[ -f $cnfp ]] && source $cnfp
 
 # Add default values
 [[ -z $version ]] && version="v0.0.0"
