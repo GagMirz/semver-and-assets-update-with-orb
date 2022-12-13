@@ -136,7 +136,7 @@ jobs:
           command: |
             echo "text='Test text with -r argument -d otherArgument' > /home/circleci/.utils.config
             echo "flag=r" >> /home/circleci/.utils.config
-      - semver/flag-value:
+      - semver/flag-value
       - run:
           name: "Should retrieve argument of -r flag"
           command:  |
