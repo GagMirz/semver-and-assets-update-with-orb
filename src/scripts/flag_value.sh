@@ -20,7 +20,5 @@ matches = re.findall( \
 matches = [argument for argument in matches if argument[0] == \"${flag}\"];
 value = matches[0][1] if len(matches) else \"\"; \
 print(value)")
-echo $text
-echo $flag
-echo $PULL_REQUEST_BASE_REF
+
 echo "export ${answer}=${PULL_REQUEST_BASE_REF}" >> "$BASH_ENV"

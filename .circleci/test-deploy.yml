@@ -15,6 +15,11 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
+      - run:
+          name: "Adding environment variables for tests"
+          command: |
+            echo "export config_path='/home/circleci/.utils.config'" >> "$BASH_ENV"
+
       # SemVer update tests
       - semver/semver-increment
       - run:
@@ -38,8 +43,8 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v0.0.0" > /home/circleci/.utils.config
-            echo "answer=VERSION" >> /home/circleci/.utils.config
+            echo "version=v0.0.0" > $config_path
+            echo "answer=VERSION" >> $config_path
       - semver/semver-increment
       - run:
           name: "Should add patch if no option is passed"
@@ -49,21 +54,21 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v0.0.0" > /home/circleci/.utils.config
-            echo "option=p" >> /home/circleci/.utils.config
-            echo "answer=NEW_VERSION" >> /home/circleci/.utils.config
+            echo "version=v0.0.0" > $config_path
+            echo "option=p" >> $config_path
+            echo "answer=NEW_VERSION" >> $config_path
       - semver/semver-increment
       - run:
-          name: "Should add assign to new NEW_VERSION variable"
+          name: "Should assign to new NEW_VERSION variable"
           command:  |
             [[ $NEW_VERSION == "v0.0.1" ]] && echo "Patch added" || exit 137
 
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v0.0.0" > /home/circleci/.utils.config
-            echo "option=p" >> /home/circleci/.utils.config
-            echo "answer=VERSION" >> /home/circleci/.utils.config
+            echo "version=v0.0.0" > $config_path
+            echo "option=p" >> $config_path
+            echo "answer=VERSION" >> $config_path
       - semver/semver-increment
       - run:
           name: "Should add Patch"
@@ -73,9 +78,9 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v0.0.1" > /home/circleci/.utils.config
-            echo "option=m" >> /home/circleci/.utils.config
-            echo "answer=VERSION" >> /home/circleci/.utils.config
+            echo "version=v0.0.1" > $config_path
+            echo "option=m" >> $config_path
+            echo "answer=VERSION" >> $config_path
       - semver/semver-increment
       - run:
           name: "Should add Minor and reset Patch"
@@ -85,9 +90,9 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v0.1.1" > /home/circleci/.utils.config
-            echo "option=M" >> /home/circleci/.utils.config
-            echo "answer=VERSION" >> /home/circleci/.utils.config
+            echo "version=v0.1.1" > $config_path
+            echo "option=M" >> $config_path
+            echo "answer=VERSION" >> $config_path
       - semver/semver-increment
       - run:
           name: "Should add Minor and reset Minor and Patch"
@@ -97,9 +102,9 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v0.1.3" > /home/circleci/.utils.config
-            echo "option=mp" >> /home/circleci/.utils.config
-            echo "answer=VERSION" >> /home/circleci/.utils.config
+            echo "version=v0.1.3" > $config_path
+            echo "option=mp" >> $config_path
+            echo "answer=VERSION" >> $config_path
       - semver/semver-increment
       - run:
           name: "Should add Minor and reset Patch, add Patch"
@@ -109,9 +114,9 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v0.1.3" > /home/circleci/.utils.config
-            echo "option=Mp" >> /home/circleci/.utils.config
-            echo "answer=VERSION" >> /home/circleci/.utils.config
+            echo "version=v0.1.3" > $config_path
+            echo "option=Mp" >> $config_path
+            echo "answer=VERSION" >> $config_path
       - semver/semver-increment
       - run:
           name: "Should add Major and reset Minor, Patch, add Patch"
@@ -121,9 +126,9 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "version=v2.1.1" > /home/circleci/.utils.config
-            echo "option=Mmp" >> /home/circleci/.utils.config
-            echo "answer=VERSION" >> /home/circleci/.utils.config
+            echo "version=v2.1.1" > $config_path
+            echo "option=Mmp" >> $config_path
+            echo "answer=VERSION" >> $config_path
       - semver/semver-increment
       - run:
           name: "Should add Major and reset Minor, Patch, add Patch"
@@ -134,11 +139,24 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo "text='Test text with -r argument -d otherArgument'" > /home/circleci/.utils.config
-            echo "flag=r" >> /home/circleci/.utils.config
+            echo "text='Test text with -r argument -d otherArgument'" > $config_path
+            echo "flag=r" >> $config_path
       - semver/flag-value
       - run:
           name: "Should retrieve argument of -r flag"
+          command:  |
+            echo $FLAG_VALUE
+            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 144
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "text='Test text with -r argument -d otherArgument'" > $config_path
+            echo "flag=r" >> $config_path
+            echo "answer=PARAMETER" >> $config_path
+      - semver/flag-value
+      - run:
+          name: "Should assign to new PARAMETER variable"
           command:  |
             echo $FLAG_VALUE
             [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 144
