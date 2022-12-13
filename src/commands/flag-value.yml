@@ -3,7 +3,7 @@ description: "Get given flag value from a string, works withy python and regex"
 
 parameters:
   config_path:
-    description: "Path to configuration file to source, required configs option, version"
+    description: "Path to configuration file to source, required configs text, flag, answer"
     type: string
     default: "/home/circleci/.utils.config"
 

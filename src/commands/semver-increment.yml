@@ -3,7 +3,7 @@ description: "Get Semver tag via github API, update via version_increment.sh and
 
 parameters:
   config_path:
-    description: "Path to configuration file to source, required configs option, version"
+    description: "Path to configuration file to source, required configs version, option, answer"
     type: string
     default: "/home/circleci/.utils.config"
 
