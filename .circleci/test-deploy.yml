@@ -218,6 +218,7 @@ jobs:
       - run:
           name: "Should work with given commit"
           command:  |
+            echo $COMMIT_MESSAGE
             [[ $COMMIT_MESSAGE == 'feat: Initial commit.' ]] && echo "Message should be correct" || exit 150
 
 
