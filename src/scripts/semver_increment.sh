@@ -3,11 +3,16 @@
 # shellcheck disable=SC2154,SC2206,SC2236
 # SC2154 justification: Variable assigned outside of script file. 
 # SC2206,SC2236 justification: Meaningless warning/error. 
+# shellcheck disable=all
 
 # Add default values
 [[ -z $version ]] && version="v0.0.0"
 [[ -z $level ]] && level="p"
 [[ -z $answer ]] && answer="VERSION"
+
+echo $version
+echo $level
+echo $answer
 
 while read -r -n1 op; do
   case $op in
@@ -40,4 +45,8 @@ if [ ! -z $patch ]; then
 fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
+export $vFlag
+export $a[0]
+export $a[1]
+export $a[2]
 echo "export ${answer}=${version}" >> "$BASH_ENV"
