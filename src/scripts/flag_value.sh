@@ -18,7 +18,7 @@ matches = re.findall( \
     r'(?<=[-{1,2}|\/])(?P<name>[a-zA-Z0-9]*)[ |:|\\\"]*(?P<value>[\w]*)(?=[ |\\\"]|$)', \
     text); \
 matches = [argument for argument in matches if argument[0] == \"${flag}\"];
-value = len(matches) if matches[0][1] else \"\"; \
+len(matches) if value=matches[0][1] else value=\"\"; \
 print(value)")
 echo $text
 echo $flag
