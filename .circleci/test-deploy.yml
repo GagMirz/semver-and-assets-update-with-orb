@@ -15,8 +15,60 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
-      # Run your orb's commands to validate them.
-      - semver/semver-increment
+      # SemVer update tests
+      - semver/semver-increment:
+          level: "p"
+          version: "v0.0.0"
+      - run:
+          name: "Should add Patch"
+          command:  |
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 134
+      - semver/semver-increment:
+          level: "m"
+          version: "v0.0.1"
+      - run:
+          name: "Should add Minor and reset Patch"
+          command:  |
+            [[ $VERSION == "v0.1.0" ]] && echo "Minor added, Patch reseted" || exit 135
+      - semver/semver-increment:
+          level: "M"
+          version: "v0.1.1"
+      - run:
+          name: "Should add Major and reset Minor, Patch"
+          command:  |
+            [[ $VERSION == "v1.0.0" ]] && echo "Major added, Minor reseted, Patch reseted" || exit 136
+      - semver/semver-increment:
+          level: "mp"
+          version: "v0.1.3"
+      - run:
+          name: "Should add Minor and reset Patch, add Patch"
+          command:  |
+            [[ $VERSION == "v0.2.1" ]] && echo "Minor added, Patch reseted, Patch added" || exit 137
+      - semver/semver-increment:
+          level: "Mp"
+          version: "v0.1.3"
+      - run:
+          name: "Should add Major and reset Minor, Patch, add Patch"
+          command:  |
+            [[ $VERSION == "v1.0.1" ]] && echo "hMajor added, Minor reseted, Patch reseted, Patch added" || exit 138
+      - semver/semver-increment:
+          level: "Mmp"
+          version: "v2.1.1"
+      - run:
+          name: "Should add Major and reset Minor, Patch, add Minor, add Patch"
+          command:  |
+            echo $VERSION
+            [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 139
+
+      # Flag Value tests
+      - semver/flag-value:
+          text: 'Test text with -r argument -d otherArgument'
+          flag: "r"
+      - run:
+          name: "Should retrieve argument of -r flag"
+          command:  |
+            echo $FLAG_VALUE
+            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 140
 workflows:
   test-deploy:
     jobs:
