@@ -25,13 +25,26 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
+            echo "version=v0.0.0" > /home/circleci/.new_utils.config
+            echo "option=p" >> /home/circleci/.new_utils.config
+            echo "answer=NEW_VERSION" >> /home/circleci/.new_utils.config
+      - semver/semver-increment:
+          config_path: "/home/circleci/.new_utils.config"
+      - run:
+          name: "Should work with changed config path"
+          command:  |
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 135
+
+      - run:
+          name: "Load parameters to env"
+          command: |
             echo "version=v0.0.0" > /home/circleci/.utils.config
             echo "answer=VERSION" >> /home/circleci/.utils.config
       - semver/semver-increment
       - run:
           name: "Should add patch if no option is passed"
           command:  |
-            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 135
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 136
 
       - run:
           name: "Load parameters to env"
@@ -43,7 +56,7 @@ jobs:
       - run:
           name: "Should add assign to new NEW_VERSION variable"
           command:  |
-            [[ $NEW_VERSION == "v0.0.1" ]] && echo "Patch added" || exit 136
+            [[ $NEW_VERSION == "v0.0.1" ]] && echo "Patch added" || exit 137
 
       - run:
           name: "Load parameters to env"
@@ -55,7 +68,7 @@ jobs:
       - run:
           name: "Should add Patch"
           command:  |
-            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 137
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 138
 
       - run:
           name: "Load parameters to env"
@@ -67,7 +80,7 @@ jobs:
       - run:
           name: "Should add Minor and reset Patch"
           command:  |
-            [[ $VERSION == "v0.1.0" ]] && echo "Minor added, Patch reseted" || exit 138
+            [[ $VERSION == "v0.1.0" ]] && echo "Minor added, Patch reseted" || exit 139
 
       - run:
           name: "Load parameters to env"
@@ -79,7 +92,7 @@ jobs:
       - run:
           name: "Should add Minor and reset Minor and Patch"
           command:  |
-            [[ $VERSION == "v1.0.0" ]] && echo "Major added, Minor reseted, Patch reseted" || exit 139
+            [[ $VERSION == "v1.0.0" ]] && echo "Major added, Minor reseted, Patch reseted" || exit 140
 
       - run:
           name: "Load parameters to env"
@@ -91,7 +104,7 @@ jobs:
       - run:
           name: "Should add Minor and reset Patch, add Patch"
           command:  |
-            [[ $VERSION == "v0.2.1" ]] && echo "Minor added, Patch reseted, Patch added" || exit 140
+            [[ $VERSION == "v0.2.1" ]] && echo "Minor added, Patch reseted, Patch added" || exit 141
 
       - run:
           name: "Load parameters to env"
@@ -103,7 +116,7 @@ jobs:
       - run:
           name: "Should add Major and reset Minor, Patch, add Patch"
           command:  |
-            [[ $VERSION == "v1.0.1" ]] && echo "hMajor added, Minor reseted, Patch reseted, Patch added" || exit 141
+            [[ $VERSION == "v1.0.1" ]] && echo "hMajor added, Minor reseted, Patch reseted, Patch added" || exit 142
 
       - run:
           name: "Load parameters to env"
@@ -115,7 +128,7 @@ jobs:
       - run:
           name: "Should add Major and reset Minor, Patch, add Patch"
           command:  |
-            [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 142
+            [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 143
 
       # Flag Value tests
       - semver/flag-value:
@@ -125,7 +138,7 @@ jobs:
           name: "Should retrieve argument of -r flag"
           command:  |
             echo $FLAG_VALUE
-            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 143
+            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 144
 workflows:
   test-deploy:
     jobs:

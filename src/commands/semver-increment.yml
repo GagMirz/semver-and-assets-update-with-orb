@@ -12,8 +12,5 @@ steps:
       name: "Set env path"
       command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
   - run:
-      name: "Set env path"
-      command: echo << parameters.config_path >>
-  - run:
       name: "Calculate, increment and update new version into global variable"
       command: "<< include(scripts/semver_increment.sh) >>"
