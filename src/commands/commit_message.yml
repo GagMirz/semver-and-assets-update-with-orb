@@ -12,5 +12,5 @@ steps:
       name: "Set env path"
       command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
   - run:
-      name: "Get given flag value from a string"
+      name: "Retrieve and set commit message to variable"
       command: "<< include(scripts/commit_message.sh) >>"

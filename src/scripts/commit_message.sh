@@ -12,4 +12,4 @@
 message=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
 
 # :41 to exclude commit hash from msg
-echo "export ${answer}=${PULL_REQUEST_BASE_REF:41}" >> "$BASH_ENV"
+echo "export ${answer}=${message:41}" >> "$BASH_ENV"
