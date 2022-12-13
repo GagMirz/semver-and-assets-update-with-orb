@@ -192,7 +192,7 @@ jobs:
           name: "Load parameters to env"
           command: |
             echo "answer=MSG" > /home/circleci/.new_utils.config
-      - semver/flag-value:
+      - semver/commit_message:
           config_path: "/home/circleci/.new_utils.config"
       - run:
           name: "Should work with changed config path"
