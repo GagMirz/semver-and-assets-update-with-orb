@@ -25,7 +25,7 @@ jobs:
       - semver/semver-increment
       - run: 
           name: "Read answer"
-          command: "echo $VERSION"
+          command: echo "-${answer}-"
       - run:
           name: "Should add Patch"
           command:  |
