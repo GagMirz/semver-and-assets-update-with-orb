@@ -5,7 +5,7 @@ parameters:
   configs_path:
     description: "Path to configuration file to source, required configs option, version"
     type: string
-    default: "/.utils.config"
+    default: "/home/circleci/.utils.config"
 
 steps:
   - run:
