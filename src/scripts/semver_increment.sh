@@ -4,6 +4,11 @@
 # SC2154 justification: Variable assigned outside of script file. 
 # SC2206,SC2236 justification: Meaningless warning/error. 
 
+# Add default values
+[[ -z $version ]] && version="v0.0.0"
+[[ -z $level ]] && level="p"
+[[ -z $answer ]] && answer="VERSION"
+
 while read -r -n1 op; do
   case $op in
     M ) major=true;;
