@@ -10,7 +10,8 @@
 [[ -z $answer ]] && answer="COMMIT_MESSAGE"
 
 message=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
+echo $answer
 echo $CIRCLE_SHA1
-echo $message
+echo ${message:41}
 # :41 to exclude commit hash from msg
 echo "export ${answer}=${message:41}" >> "$BASH_ENV"
