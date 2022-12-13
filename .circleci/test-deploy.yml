@@ -19,11 +19,9 @@ jobs:
       - run:
           name: "Load parameters to env"
           command: |
-            echo " \
-            version=v0.0.0 \
-            level=p \
-            answer=VERSION \
-            " > /.utils.config
+            echo "version=v0.0.0" > /.utils.config
+            echo "level=p" >> /.utils.config
+            echo "answer=VERSION" >> /.utils.config
       - semver/semver-increment:
       - run:
           name: "Should add Patch"
