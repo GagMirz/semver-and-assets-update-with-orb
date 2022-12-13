@@ -12,10 +12,16 @@ steps:
       name: "Add level to env"
       command: source << parameters.configs_path >>
   - run:
-      name: "Add default values if missing"
+      name: "Add default values if missing to level"
       command: |
         [[ -z $version ]] && version="v0.0.0"
+  - run:
+      name: "Add default values if missing to level"
+      command: |
         [[ -z $level ]] && level="p"
+  - run:
+      name: "Add default values if missing to level"
+      command: |
         [[ -z $answer ]] && answer="VERSION"
   - run:
       name: "Calculate, increment and update new version into global variable"
