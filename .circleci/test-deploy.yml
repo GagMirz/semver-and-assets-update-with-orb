@@ -232,7 +232,7 @@ jobs:
           name: "Should get release tag of repository"
           command:  |
             echo $TAG
-            [[ ! -z "$TAG" ]] && echo "Release Tag empty" || exit 149
+            [[ ! -z "$TAG" ]] && echo "Release tag shouldn't empty" || exit 149
 
 
 workflows:
