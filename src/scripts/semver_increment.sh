@@ -22,6 +22,10 @@ while read -r -n1 op; do
   esac
 done < <(echo -n "$option")
 
+echo $major
+echo $minor
+echo $patch
+
 a=( ${version//./ } )
 
 if [ "${a[0]:0:1}" == "v" ]; then
