@@ -9,8 +9,8 @@ parameters:
 
 steps:
   - run:
-      name: "Load env"
-      command: echo `cat << parameters.configs_path >>` >> "$BASH_ENV"
+      name: "Set env path"
+      command: echo `export config_path='<< parameters.configs_path >>'` >> "$BASH_ENV"
   - run:
       name: "Calculate, increment and update new version into global variable"
       command: "<< include(scripts/semver_increment.sh) >>"

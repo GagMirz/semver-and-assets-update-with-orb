@@ -16,6 +16,12 @@ jobs:
     steps:
       - checkout
       # SemVer update tests
+      - semver/semver-increment
+      - run:
+          name: "Should work with default values"
+          command:  |
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 134
+
       - run:
           name: "Load parameters to env"
           command: |
@@ -23,49 +29,70 @@ jobs:
             echo "option=p" >> /home/circleci/.utils.config
             echo "answer=VERSION" >> /home/circleci/.utils.config
       - semver/semver-increment
-      - run: 
-          name: "Read answer"
-          command: echo "$VERSION"
       - run:
           name: "Should add Patch"
           command:  |
-            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 134
-      # - semver/semver-increment:
-      #     level: "m"
-      #     version: "v0.0.1"
-      # - run:
-      #     name: "Should add Minor and reset Patch"
-      #     command:  |
-      #       [[ $VERSION == "v0.1.0" ]] && echo "Minor added, Patch reseted" || exit 135
-      # - semver/semver-increment:
-      #     level: "M"
-      #     version: "v0.1.1"
-      # - run:
-      #     name: "Should add Major and reset Minor, Patch"
-      #     command:  |
-      #       [[ $VERSION == "v1.0.0" ]] && echo "Major added, Minor reseted, Patch reseted" || exit 136
-      # - semver/semver-increment:
-      #     level: "mp"
-      #     version: "v0.1.3"
-      # - run:
-      #     name: "Should add Minor and reset Patch, add Patch"
-      #     command:  |
-      #       [[ $VERSION == "v0.2.1" ]] && echo "Minor added, Patch reseted, Patch added" || exit 137
-      # - semver/semver-increment:
-      #     level: "Mp"
-      #     version: "v0.1.3"
-      # - run:
-      #     name: "Should add Major and reset Minor, Patch, add Patch"
-      #     command:  |
-      #       [[ $VERSION == "v1.0.1" ]] && echo "hMajor added, Minor reseted, Patch reseted, Patch added" || exit 138
-      # - semver/semver-increment:
-      #     level: "Mmp"
-      #     version: "v2.1.1"
-      # - run:
-      #     name: "Should add Major and reset Minor, Patch, add Minor, add Patch"
-      #     command:  |
-      #       echo $VERSION
-      #       [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 139
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 135
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.0.1" > /home/circleci/.utils.config
+            echo "option=m" >> /home/circleci/.utils.config
+            echo "answer=VERSION" >> /home/circleci/.utils.config
+      - semver/semver-increment
+      - run:
+          name: "Should add Minor and reset Patch"
+          command:  |
+            [[ $VERSION == "v0.1.0" ]] && echo "Minor added, Patch reseted" || exit 136
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.1.1" > /home/circleci/.utils.config
+            echo "option=M" >> /home/circleci/.utils.config
+            echo "answer=VERSION" >> /home/circleci/.utils.config
+      - semver/semver-increment
+      - run:
+          name: "Should add Minor and reset Minor and Patch"
+          command:  |
+            [[ $VERSION == "v1.0.0" ]] && echo "Major added, Minor reseted, Patch reseted" || exit 137
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.1.3" > /home/circleci/.utils.config
+            echo "option=mp" >> /home/circleci/.utils.config
+            echo "answer=VERSION" >> /home/circleci/.utils.config
+      - semver/semver-increment
+      - run:
+          name: "Should add Minor and reset Patch, add Patch"
+          command:  |
+            [[ $VERSION == "v0.2.1" ]] && echo "Minor added, Patch reseted, Patch added" || exit 138
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.1.3" > /home/circleci/.utils.config
+            echo "option=Mp" >> /home/circleci/.utils.config
+            echo "answer=VERSION" >> /home/circleci/.utils.config
+      - semver/semver-increment
+      - run:
+          name: "Should add Major and reset Minor, Patch, add Patch"
+          command:  |
+            [[ $VERSION == "v1.0.1" ]] && echo "hMajor added, Minor reseted, Patch reseted, Patch added" || exit 139
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v2.1.1" > /home/circleci/.utils.config
+            echo "option=Mmp" >> /home/circleci/.utils.config
+            echo "answer=VERSION" >> /home/circleci/.utils.config
+      - semver/semver-increment
+      - run:
+          name: "Should add Major and reset Minor, Patch, add Patch"
+          command:  |
+            [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 140
 
       # Flag Value tests
       - semver/flag-value:
