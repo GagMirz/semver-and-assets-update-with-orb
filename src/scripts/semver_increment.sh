@@ -5,6 +5,7 @@
 # SC2206,SC2236 justification: Meaningless warning/error. 
 # shellcheck disable=all
 
+echo $cnfg_p
 source $cnfg_p
 
 # Add default values
