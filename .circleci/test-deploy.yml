@@ -145,7 +145,6 @@ jobs:
       - run:
           name: "Should retrieve argument of -r flag"
           command:  |
-            echo $FLAG_VALUE
             [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 144
 
       - run:
@@ -158,8 +157,26 @@ jobs:
       - run:
           name: "Should assign to new PARAMETER variable"
           command:  |
-            echo $FLAG_VALUE
-            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 144
+            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved in new PARAMETER variable" || exit 145
+
+      # Read message from git commit 
+      # Exact checking not possible (value is dynamic)
+      - semver/commit_message
+      - run:
+          name: "Shouldn't be empty"
+          command: |
+            [[ ! -z "$COMMIT_MESSAGE" ]] && echo "Message is not empty" || exit 146
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "answer=MESSAGE" >> $config_path
+      - semver/commit_message
+      - run:
+          name: "Should assign to new MESSAGE variable"
+          command:  |
+            [[ ! -z "$MESSAGE" ]] && echo "Message in new MESSAGE variable" || exit 147
+
 workflows:
   test-deploy:
     jobs:

@@ -1,5 +1,5 @@
 # set-new-version-tag:
-description: "Get given flag value from a string, works withy python and regex"
+description: "Get message of git commit, default commit is last commit on branch"
 
 parameters:
   config_path:
@@ -13,4 +13,4 @@ steps:
       command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
   - run:
       name: "Get given flag value from a string"
-      command: "<< include(scripts/flag_value.sh) >>"
+      command: "<< include(scripts/commit_message.sh) >>"
