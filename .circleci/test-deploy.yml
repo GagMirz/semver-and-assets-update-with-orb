@@ -136,6 +136,9 @@ jobs:
             [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 143
 
       # Flag Value tests
+      - run: 
+          name: "Emptying config file"
+          command: rm -rf $config_path
       - run:
           name: "Load parameters to env"
           command: |
@@ -161,6 +164,9 @@ jobs:
 
       # Read message from git commit 
       # Exact checking not possible (value is dynamic)
+      - run: 
+          name: "Emptying config file"
+          command: rm -rf $config_path
       - semver/commit_message
       - run:
           name: "Shouldn't be empty"
