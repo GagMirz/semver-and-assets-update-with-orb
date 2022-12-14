@@ -5,16 +5,12 @@
 # SC2206,SC2236 justification: Meaningless warning/error. 
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 
-[[ -f $cnfp ]] && source $cnfp
+[[ -f "${cnfp}" ]] && source "${cnfp}"
 
 # Add default values
-[[ -z $version ]] && version="v0.0.0"
-[[ -z $option ]] && option="p"
-[[ -z $answer ]] && answer="VERSION"
-
-echo $version
-echo $option
-echo $answer
+[[ -z "${version}" ]] && version="v0.0.0"
+[[ -z "${option}" ]] && option="p"
+[[ -z "${answer}" ]] && answer="VERSION"
 
 while read -r -n1 op; do
   case $op in

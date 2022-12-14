@@ -3,11 +3,11 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
-[[ -f $cnfp ]] && source $cnfp
+[[ -f "${cnfp}" ]] && source "${cnfp}"
 # Add default values
-[[ -z $commit_hash ]] && commit_hash=$CIRCLE_SHA1
+[[ -z "${commit_hash}" ]] && commit_hash=$CIRCLE_SHA1
 
-[[ -z $answer ]] && answer="COMMIT_MESSAGE"
+[[ -z "${answer}" ]] && answer="COMMIT_MESSAGE"
 
 message=$(git log --format=oneline -n 1 $commit_hash)
 
