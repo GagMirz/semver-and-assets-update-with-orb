@@ -15,60 +15,230 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
+      - run:
+          name: "Adding environment variables for tests"
+          command: |
+            echo "export config_path='/home/circleci/.utils.config'" >> "$BASH_ENV"
+
       # SemVer update tests
+      - semver/semver-increment
+      - run:
+          name: "Should work with default values"
+          command:  |
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 134
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.0.0" > /home/circleci/.new_utils.config
+            echo "option=p" >> /home/circleci/.new_utils.config
+            echo "answer=NEW_VERSION" >> /home/circleci/.new_utils.config
       - semver/semver-increment:
-          level: "p"
-          version: "v0.0.0"
+          config_path: "/home/circleci/.new_utils.config"
+      - run:
+          name: "Should work with changed config path"
+          command:  |
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 135
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.0.0" > $config_path
+            echo "answer=VERSION" >> $config_path
+      - semver/semver-increment
+      - run:
+          name: "Should add patch if no option is passed"
+          command:  |
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 136
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.0.0" > $config_path
+            echo "option=p" >> $config_path
+            echo "answer=NEW_VERSION" >> $config_path
+      - semver/semver-increment
+      - run:
+          name: "Should assign to new NEW_VERSION variable"
+          command:  |
+            [[ $NEW_VERSION == "v0.0.1" ]] && echo "Patch added" || exit 137
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.0.0" > $config_path
+            echo "option=p" >> $config_path
+            echo "answer=VERSION" >> $config_path
+      - semver/semver-increment
       - run:
           name: "Should add Patch"
           command:  |
-            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 134
-      - semver/semver-increment:
-          level: "m"
-          version: "v0.0.1"
+            [[ $VERSION == "v0.0.1" ]] && echo "Patch added" || exit 138
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.0.1" > $config_path
+            echo "option=m" >> $config_path
+            echo "answer=VERSION" >> $config_path
+      - semver/semver-increment
       - run:
           name: "Should add Minor and reset Patch"
           command:  |
-            [[ $VERSION == "v0.1.0" ]] && echo "Minor added, Patch reseted" || exit 135
-      - semver/semver-increment:
-          level: "M"
-          version: "v0.1.1"
+            [[ $VERSION == "v0.1.0" ]] && echo "Minor added, Patch reseted" || exit 139
+
       - run:
-          name: "Should add Major and reset Minor, Patch"
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.1.1" > $config_path
+            echo "option=M" >> $config_path
+            echo "answer=VERSION" >> $config_path
+      - semver/semver-increment
+      - run:
+          name: "Should add Minor and reset Minor and Patch"
           command:  |
-            [[ $VERSION == "v1.0.0" ]] && echo "Major added, Minor reseted, Patch reseted" || exit 136
-      - semver/semver-increment:
-          level: "mp"
-          version: "v0.1.3"
+            [[ $VERSION == "v1.0.0" ]] && echo "Major added, Minor reseted, Patch reseted" || exit 140
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.1.3" > $config_path
+            echo "option=mp" >> $config_path
+            echo "answer=VERSION" >> $config_path
+      - semver/semver-increment
       - run:
           name: "Should add Minor and reset Patch, add Patch"
           command:  |
-            [[ $VERSION == "v0.2.1" ]] && echo "Minor added, Patch reseted, Patch added" || exit 137
-      - semver/semver-increment:
-          level: "Mp"
-          version: "v0.1.3"
+            [[ $VERSION == "v0.2.1" ]] && echo "Minor added, Patch reseted, Patch added" || exit 141
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "version=v0.1.3" > $config_path
+            echo "option=Mp" >> $config_path
+            echo "answer=VERSION" >> $config_path
+      - semver/semver-increment
       - run:
           name: "Should add Major and reset Minor, Patch, add Patch"
           command:  |
-            [[ $VERSION == "v1.0.1" ]] && echo "hMajor added, Minor reseted, Patch reseted, Patch added" || exit 138
-      - semver/semver-increment:
-          level: "Mmp"
-          version: "v2.1.1"
+            [[ $VERSION == "v1.0.1" ]] && echo "hMajor added, Minor reseted, Patch reseted, Patch added" || exit 142
+
       - run:
-          name: "Should add Major and reset Minor, Patch, add Minor, add Patch"
+          name: "Load parameters to env"
+          command: |
+            echo "version=v2.1.1" > $config_path
+            echo "option=Mmp" >> $config_path
+            echo "answer=VERSION" >> $config_path
+      - semver/semver-increment
+      - run:
+          name: "Should add Major and reset Minor, Patch, add Patch"
           command:  |
-            echo $VERSION
-            [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 139
+            [[ $VERSION == "v3.1.1" ]] && echo "Major added, Minor reseted, Patch reseted, Minor added, Patch added" || exit 143
 
       # Flag Value tests
-      - semver/flag-value:
-          text: 'Test text with -r argument -d otherArgument'
-          flag: "r"
+      - run: 
+          name: "Emptying config file"
+          command: rm -rf $config_path
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "text='Test text with -r argument -d otherArgument'" > $config_path
+            echo "flag=r" >> $config_path
+      - semver/flag-value
       - run:
           name: "Should retrieve argument of -r flag"
           command:  |
-            echo $FLAG_VALUE
-            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 140
+            [[ $FLAG_VALUE == "argument" ]] && echo "Flag retrieved" || exit 144
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "text='Test text with -r argument -d otherArgument'" > /home/circleci/.new_utils.config
+            echo "flag=r" >> /home/circleci/.new_utils.config
+            echo "answer=VALUE" >> /home/circleci/.new_utils.config
+            cat /home/circleci/.new_utils.config
+      - semver/flag-value:
+          config_path: "/home/circleci/.new_utils.config"
+      - run:
+          name: "Should work with changed config path"
+          command:  |
+            [[ $VALUE == "argument" ]] && echo "Flag retrieved" || exit 145
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "text='Test text with -r argument -d otherArgument'" > $config_path
+            echo "flag=r" >> $config_path
+            echo "answer=PARAMETER" >> $config_path
+      - semver/flag-value
+      - run:
+          name: "Should assign to new PARAMETER variable"
+          command:  |
+            [[ $PARAMETER == "argument" ]] && echo "Flag retrieved in new PARAMETER variable" || exit 146
+
+      # Read message from git commit 
+      # Exact checking not possible (value is dynamic)
+      - run: 
+          name: "Emptying config file"
+          command: rm -rf $config_path
+      - semver/commit_message
+      - run:
+          name: "Shouldn't be empty"
+          command: |
+            echo "$COMMIT_MESSAGE"
+            [[ ! -z "$COMMIT_MESSAGE" ]] && echo "Message is not empty" || exit 147
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "answer=MSG" > /home/circleci/.new_utils.config
+      - semver/commit_message:
+          config_path: "/home/circleci/.new_utils.config"
+      - run:
+          name: "Should work with changed config path"
+          command:  |
+            [[ ! -z "$MSG" ]] && echo "Message is not empty" || exit 148
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "answer=MESSAGE" >> $config_path
+      - semver/commit_message
+      - run:
+          name: "Should assign to new MESSAGE variable"
+          command:  |
+            [[ ! -z "$MESSAGE" ]] && echo "Message in new MESSAGE variable" || exit 149
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "commit_hash=e472db1ca43eac2ad3baecf86e6ef02641b093e1" > $config_path
+      - semver/commit_message
+      - run:
+          name: "Should work with given commit"
+          command:  |
+            echo $COMMIT_MESSAGE
+            [[ $COMMIT_MESSAGE == 'feat: Initial commit.' ]] && echo "Message should be correct" || exit 150
+
+      # Read message from git commit 
+      # Exact checking with other repositories not possible (value is dynamic)
+      - run: 
+          name: "Emptying config file"
+          command: rm -rf $config_path
+
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "token='${GITHUB_TOKEN}'" > $config_path
+      - semver/release_tag
+      - run:
+          name: "Should get release tag of repository"
+          command:  |
+            echo $TAG
+            [[ ! -z "$TAG" ]] && echo "Release tag shouldn't empty" || exit 149
+
+
 workflows:
   test-deploy:
     jobs:

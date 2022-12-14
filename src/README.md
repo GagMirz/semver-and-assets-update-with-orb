@@ -18,8 +18,6 @@ Within the `@orb.yml` we generally specify 4 configuration keys
     Give your orb a description. Shown within the CLI and orb registry
 3. **display**
     Specify the `home_url` referencing documentation or product URL, and `source_url` linking to the orb's source repository.
-4. **orbs**
-    (optional) Some orbs may depend on other orbs. Import them here.
 
 ## See:
  - [Orb Author Intro](https://circleci.com/docs/2.0/orb-author-intro/#section=configuration)

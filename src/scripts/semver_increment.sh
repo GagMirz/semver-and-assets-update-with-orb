@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# shellcheck disable=SC2154,SC2206,SC2236
-# SC2154 justification: Variable assigned outside of script file. 
+# shellcheck disable=SC2154,SC2206,SC2236,SC1090
 # SC2206,SC2236 justification: Meaningless warning/error. 
+# SC1090 justification: file should be created outside, path is not fixed, can't specify source.
+# SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
+
+[[ -f "${cnfp}" ]] && source "${cnfp}"
+
+# Add default values
+[[ -z "${version}" ]] && version="v0.0.0"
+[[ -z "${option}" ]] && option="p"
+[[ -z "${answer}" ]] && answer="VERSION"
 
 while read -r -n1 op; do
   case $op in
@@ -11,6 +19,10 @@ while read -r -n1 op; do
     p ) patch=true;;
   esac
 done < <(echo -n "$option")
+
+echo $major
+echo $minor
+echo $patch
 
 a=( ${version//./ } )
 
@@ -35,4 +47,8 @@ if [ ! -z $patch ]; then
 fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
+echo $vFlag
+echo ${a[0]}
+echo ${a[1]}
+echo ${a[2]}
 echo "export ${answer}=${version}" >> "$BASH_ENV"

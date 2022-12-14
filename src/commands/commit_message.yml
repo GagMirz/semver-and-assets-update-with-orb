@@ -1,0 +1,16 @@
+# set-new-version-tag:
+description: "Get message of git commit, default commit is last commit on branch"
+
+parameters:
+  config_path:
+    description: "Path to configuration file to source, required configs commit_hash, answer"
+    type: string
+    default: "/home/circleci/.utils.config"
+
+steps:
+  - run:
+      name: "Set env path"
+      command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
+  - run:
+      name: "Retrieve and set commit message to variable"
+      command: "<< include(scripts/commit_message.sh) >>"
