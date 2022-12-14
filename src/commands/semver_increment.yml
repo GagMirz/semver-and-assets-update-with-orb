@@ -1,0 +1,16 @@
+# set-new-version-tag:
+description: "Get Semver tag via github API, update via version_increment.sh and export VERSION variable"
+
+parameters:
+  config_path:
+    description: "Path to configuration file to source, required configs version, option, answer"
+    type: string
+    default: "/home/circleci/.utils.config"
+
+steps:
+  - run:
+      name: "Set env path"
+      command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
+  - run:
+      name: "Calculate, increment and update new version into global variable"
+      command: "<< include(scripts/semver_increment.sh) >>"
