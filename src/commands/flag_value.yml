@@ -1,5 +1,5 @@
 # set-new-version-tag:
-description: "Get flag value from a string, works withy python and regex"
+description: "Get given flag value from a string, works withy python and regex"
 
 parameters:
   config_path:

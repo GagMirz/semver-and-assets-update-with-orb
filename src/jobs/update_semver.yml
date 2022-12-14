@@ -1,0 +1,53 @@
+description: "Job to automatically update semver depending on last commit message"
+
+docker:
+    - image: cibuilds/github:0.10
+
+parameters:
+    assets_path:
+        description: "Path do release assets"
+        type: string
+        default: "/assets"
+    create_asset:
+        description: "Steps which will create assets for release"
+        type: steps
+
+steps:
+    - checkout
+    - run:
+          name: "Adding environment variables for tests"
+          command: |
+              echo "export config_path='/home/circleci/.utils.config'" >> "$BASH_ENV"
+              mkdir -p /home/circleci/
+              touch /home/circleci/.utils.config
+    - run:
+          name: "Install python"
+          command: apk add --no-cache python3
+
+    - release_tag
+
+    - commit_message
+
+    - when:
+          condition: ${COMMIT_MESSAGE}
+          steps:
+              - run:
+                    name: "Load parameters to env"
+                    command: |
+                        echo "text=\"${COMMIT_MESSAGE}\"" > $config_path
+                        echo "flag=r" >> $config_path
+
+              - flag_value
+
+              - run:
+                    name: "Load parameters to env"
+                    command: |
+                        echo "version=\"${TAG}\"" > $config_path
+                        echo "option=\"${FLAG_VALUE}\"" >> $config_path
+              - semver_increment
+              - steps: << parameters.create_asset >>
+
+              - run:
+                    name: "Publish Release on GitHub"
+                    command: |
+                        ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} << parameters.assets_path >>

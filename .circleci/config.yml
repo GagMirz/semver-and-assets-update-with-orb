@@ -17,6 +17,8 @@ workflows:
           filters: *filters
       - orb-tools/review:
           filters: *filters
+          # RC009 justification: Meaningless for update_semver job
+          exclude: "RC009"
       - shellcheck/check:
           filters: *filters
       - orb-tools/publish:
