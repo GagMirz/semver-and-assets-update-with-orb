@@ -18,5 +18,7 @@ echo $repository
 echo $token
 echo $answer
 
+cat $BASH_ENV
+
 tag=`curl https://api.github.com/repos/${username}/${repository}/releases/latest -s  --header \"Authorization\" $token| jq .name -r`
 echo "export ${answer}=${tag}" >> "$BASH_ENV"
