@@ -1,3 +1,5 @@
+description: "Job to automatically update semver depending on last commit message"
+
 docker:
       - image: cibuilds/github:0.10
 
