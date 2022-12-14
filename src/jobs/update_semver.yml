@@ -22,9 +22,9 @@ steps:
         name: "Install python"
         command: apk add --no-cache python3
 
-    - semver/release_tag
+    - release_tag
 
-    - semver/commit_message
+    - commit_message
 
     - when: 
         condition: ${COMMIT_MESSAGE}
@@ -35,14 +35,14 @@ steps:
                     echo "text=\"${COMMIT_MESSAGE}\"" > $config_path
                     echo "flag=r" >> $config_path
             
-            - semver/flag_value
+            - flag_value
 
             - run:
                 name: "Load parameters to env"
                 command: |
                     echo "version=\"${TAG}\"" > $config_path
                     echo "option=\"${FLAG_VALUE}\"" >> $config_path
-            - semver/semver_increment
+            - semver_increment
             
             - steps: << parameters.create_asset >>
 
