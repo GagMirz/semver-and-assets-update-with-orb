@@ -227,6 +227,10 @@ jobs:
           name: "Emptying config file"
           command: rm -rf $config_path
 
+      - run:
+          name: "Load parameters to env"
+          command: |
+            echo "token='${GITHUB_TOKEN}'" > $config_path
       - semver/release_tag
       - run:
           name: "Should get release tag of repository"
