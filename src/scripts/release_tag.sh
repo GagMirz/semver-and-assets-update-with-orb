@@ -15,7 +15,7 @@ echo $CIRCLE_PROJECT_REPONAME
 echo $GITHUB_TOKEN
 echo $username
 echo $repository
-echo '${token}'
+echo "${token}"
 echo $answer
 echo "https://api.github.com/repos/${username}/${repository}/releases/latest"
 echo "\"Authorization\" ${token}"
