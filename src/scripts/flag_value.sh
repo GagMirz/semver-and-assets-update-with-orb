@@ -1,7 +1,7 @@
 #!/bin/bash
-# shellcheck disable=SC2154
-# SC2154 justification: Variable assigned outside of script file.
-# shellcheck disable=all
+# shellcheck disable=SC2154,SC1090
+# SC1090 justification: file should be created outside, path is not fixed, can't specify source.
+# SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
 [[ -f $cnfp ]] && source $cnfp
 
