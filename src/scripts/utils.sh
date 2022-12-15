@@ -14,5 +14,5 @@ SourceParameters() {
 }
 
 CreateAnswer() {
-    echo "export $1=\"$2\" >>"$BASH_ENV"
+    echo "export $1=\"$2\"" >>"$BASH_ENV"
 }
