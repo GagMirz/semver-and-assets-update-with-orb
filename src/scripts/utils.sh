@@ -4,7 +4,6 @@
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
 SourceParameters() {
-    echo 1
     if [[ -f "${cnfp}" ]]; then
         source "${cnfp}"
     else
