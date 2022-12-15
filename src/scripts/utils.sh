@@ -7,7 +7,9 @@ SourceParameters() {
     if [[ -f "${cnfp}" ]]; then
         source "${cnfp}"
     else
-        [[ "${1}" == "required" ]] && exit 127
+        if [[ "${1}" == "required" ]]; then
+            exit 127
+        fi
     fi
     # echo 4
 }
