@@ -8,7 +8,7 @@
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
 
-SourceParamaters
+SourceParameters
 # Add default values
 [[ -z "${version}" ]] && version="v0.0.0"
 [[ -z "${option}" ]] && option="p"

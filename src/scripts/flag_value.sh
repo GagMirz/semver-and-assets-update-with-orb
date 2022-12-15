@@ -6,7 +6,7 @@
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
 
-SourceParamaters required
+SourceParameters required
 
 # Add default values
 [[ -z "${text}" ]] && exit 128

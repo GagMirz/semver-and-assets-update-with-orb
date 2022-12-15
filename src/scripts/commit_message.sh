@@ -6,7 +6,7 @@
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
 
-SourceParamaters
+SourceParameters
 
 # Add default values
 [[ -z "${commit_hash}" ]] && commit_hash=$CIRCLE_SHA1
