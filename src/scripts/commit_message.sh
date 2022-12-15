@@ -12,7 +12,6 @@ SourceParameters
 [[ -z "${answer}" ]] && answer="COMMIT_MESSAGE"
 
 get_commit_message() {
-
     local message
     message=$(git log --format=oneline -n 1 "${commit_hash}")
 

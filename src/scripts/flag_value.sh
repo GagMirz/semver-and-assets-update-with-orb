@@ -14,7 +14,6 @@ echo "${answer}"
 [[ -z ${answer} ]] && answer=FLAG_VALUE
 
 get_flag_value() {
-
     export PYTHONIOENCODING=utf8
 
     local flag_value
