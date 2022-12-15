@@ -21,9 +21,12 @@ semver_increment() {
     m) minor=true ;;
     p) patch=true ;;
     esac
-  done < <(echo -n "$option")
+  done < <(echo -n "$$2")
 
-  a=(${version//./ })
+  local a
+  local vFlag
+
+  a=(${$1//./ })
 
   if [ "${a[0]:0:1}" == "v" ]; then
     a[0]="${a[0]:1}"
@@ -51,4 +54,4 @@ semver_increment() {
   echo "${version}"
 }
 
-CreateAnswer "${answer}" "$(semver_increment)"
+CreateAnswer "${answer}" "$(semver_increment \"${version}\" \"${option}\")"
