@@ -21,9 +21,9 @@ get_flag_value() {
     matches = re.findall( \
         r'(?<=[-{1,2}|\/])(?P<name>[a-zA-Z0-9]*)[ |:|\\\"]*(?P<value>[\w]*)(?=[ |\\\"]|$)', \
         text); \
-    matches = [argument for argument in matches if argument[0] == \"${flag}\"];
+    matches = [argument for argument in matches if argument[0] == \"${flag}\"]; \
     value = matches[0][1] if len(matches) else \"\"; \
-    print(value)")
+    print(value);")
 
     echo "${FLAG_VALUE}"
 }
