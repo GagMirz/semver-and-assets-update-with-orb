@@ -4,5 +4,9 @@
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
 SourceParameters() {
-    [[ -f "${cnfp}" ]] && source "${cnfp}" || [[ "${1}" == "required" ]] && exit 127
+    if [[ -f "${cnfp}" ]]; then
+        source "${cnfp}"
+    else
+        [[ "${1}" == "required" ]] && exit 127
+    fi
 }
