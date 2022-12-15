@@ -14,4 +14,4 @@ SourceParameters
 message=$(git log --format=oneline -n 1 "${commit_hash}")
 
 # :41 to exclude commit hash from msg
-echo "export ${answer}=\"${message:41}\"" >> "$BASH_ENV"
+CreateAnswer "${answer}" "${message:41}"

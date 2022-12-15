@@ -14,7 +14,7 @@ SourceParameters required
 
 export PYTHONIOENCODING=utf8
 
-PULL_REQUEST_BASE_REF=$(python3 -c "import re; \
+FLAG_VALUE=$(python3 -c "import re; \
 text = \"${text}\"; \
 matches = re.findall( \
     r'(?<=[-{1,2}|\/])(?P<name>[a-zA-Z0-9]*)[ |:|\\\"]*(?P<value>[\w]*)(?=[ |\\\"]|$)', \
@@ -23,4 +23,4 @@ matches = [argument for argument in matches if argument[0] == \"${flag}\"];
 value = matches[0][1] if len(matches) else \"\"; \
 print(value)")
 
-echo "export ${answer}=${PULL_REQUEST_BASE_REF}" >> "$BASH_ENV"
+CreateAnswer "${answer}" "${FLAG_VALUE}"
