@@ -15,9 +15,9 @@ SourceParameters
 
 get_release_tag() {
     local tag
-    tag=$(curl "https://api.github.com/repos/${username}/${repository}/releases/latest" -s -H "Authorization: ${token}" | jq .name -r)
+    tag=$(curl "https://api.github.com/repos/${1}/${2}/releases/latest" -s -H "Authorization: ${3}" | jq .name -r)
 
     echo "${tag}"
 }
 
-CreateAnswer "${answer}" "$(get_release_tag)"
+CreateAnswer "${answer}" "$(get_release_tag "${username}" "${repository}" "${3}")"

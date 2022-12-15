@@ -53,6 +53,5 @@ semver_increment() {
 
   echo "${version}"
 }
-# echo "answer here"
-# echo "$(semver_increment "${version}" "${option}")"
+
 CreateAnswer "${answer}" "$(semver_increment "${version}" "${option}")"
