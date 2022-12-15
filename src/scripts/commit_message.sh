@@ -19,6 +19,4 @@ get_commit_message() {
     echo "${message:41}"
 }
 
-get_commit_message
-echo "${answer}" "$(get_commit_message)"
 CreateAnswer "${answer}" "$(get_commit_message)"

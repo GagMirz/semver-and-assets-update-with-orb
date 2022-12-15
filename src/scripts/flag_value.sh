@@ -5,7 +5,8 @@
 
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
-SourceParameters 
+SourceParameters required
+echo "${answer}"
 
 get_flag_value() {
     # Add default values
@@ -27,5 +28,5 @@ get_flag_value() {
 
     echo "${FLAG_VALUE}"
 }
-
+echo "${answer}"
 CreateAnswer "${answer}" "$(get_flag_value)"
