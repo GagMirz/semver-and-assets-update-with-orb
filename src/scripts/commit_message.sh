@@ -18,6 +18,6 @@ get_commit_message() {
     # :41 to exclude commit hash from msg
     echo "${message:41}"
 }
-
+echo {answer}
 get_commit_message
 CreateAnswer "${answer}" "$(get_commit_message)"
