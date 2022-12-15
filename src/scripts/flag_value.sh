@@ -8,11 +8,12 @@ source src/scripts/utils.sh
 SourceParameters required
 echo "${answer}"
 
+# Add default values
+[[ -z ${text} ]] && exit 128
+[[ -z ${flag} ]] && exit 128
+[[ -z ${answer} ]] && exit 200
+
 get_flag_value() {
-    # Add default values
-    [[ -z ${text} ]] && exit 128
-    [[ -z ${flag} ]] && exit 128
-    [[ -z ${answer} ]] && exit 200 #answer="FLAG_VALUE"
 
     export PYTHONIOENCODING=utf8
 
@@ -28,5 +29,5 @@ get_flag_value() {
 
     echo "${FLAG_VALUE}"
 }
-echo "${answer}"
+
 CreateAnswer "${answer}" "$(get_flag_value)"
