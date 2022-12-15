@@ -20,35 +20,27 @@ while read -r -n1 op; do
   esac
 done < <(echo -n "$option")
 
-echo $major
-echo $minor
-echo $patch
-
 a=( ${version//./ } )
 
 if [ "${a[0]:0:1}" == "v" ]; then
-  a[0]=${a[0]:1}
+  a[0]="${a[0]:1}"
   vFlag="v"
 fi
 
-if [ ! -z $major ]; then
+if [ ! -z "${major}" ]; then
   ((a[0]=a[0]+1))
   a[1]=0
   a[2]=0
 fi
 
-if [ ! -z $minor ]; then
+if [ ! -z "${minor}" ]; then
   ((a[1]=a[1]+1))
   a[2]=0
 fi
 
-if [ ! -z $patch ]; then
+if [ ! -z "${patch}" ]; then
   ((a[2]=a[2]+1))
 fi
 
 version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
-echo $vFlag
-echo ${a[0]}
-echo ${a[1]}
-echo ${a[2]}
 echo "export ${answer}=${version}" >> "$BASH_ENV"
