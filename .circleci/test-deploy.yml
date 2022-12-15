@@ -18,6 +18,8 @@ jobs:
       - run:
           name: "Adding environment variables for tests"
           command: |
+            mkdir -p /home/circleci/
+            touch .utils.config .new_utils.config
             echo "export config_path='/home/circleci/.utils.config'" >> "$BASH_ENV"
 
       # SemVer update tests
