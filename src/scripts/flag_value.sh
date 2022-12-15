@@ -5,7 +5,7 @@
 
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
-SourceParameters required
+SourceParameters 
 
 get_flag_value() {
     # Add default values
