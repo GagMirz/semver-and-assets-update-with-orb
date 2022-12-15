@@ -7,11 +7,16 @@
 source src/scripts/utils.sh
 SourceParameters
 
-# Add default values
-[[ -z "${commit_hash}" ]] && commit_hash=$CIRCLE_SHA1
-[[ -z "${answer}" ]] && answer="COMMIT_MESSAGE"
+get_commit_message() {
+    # Add default values
+    [[ -z "${commit_hash}" ]] && commit_hash=$CIRCLE_SHA1
+    [[ -z "${answer}" ]] && answer="COMMIT_MESSAGE"
 
-message=$(git log --format=oneline -n 1 "${commit_hash}")
+    local message=$(git log --format=oneline -n 1 "${commit_hash}")
 
-# :41 to exclude commit hash from msg
-CreateAnswer "${answer}" "${message:41}"
+    # :41 to exclude commit hash from msg
+    echo message:41
+}
+
+get_commit_message
+CreateAnswer "${answer}" "$(get_commit_message)"
