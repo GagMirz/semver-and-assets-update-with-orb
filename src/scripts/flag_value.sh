@@ -10,9 +10,9 @@ echo "${answer}"
 
 get_flag_value() {
     # Add default values
-    [[ -z "${text}" ]] && exit 128
-    [[ -z "${flag}" ]] && exit 128
-    [[ -z "${answer}" ]] && exit 200 #answer="FLAG_VALUE"
+    [[ -n ${text} ]] && exit 128
+    [[ -n ${flag} ]] && exit 128
+    [[ -n ${answer} ]] && answer="FLAG_VALUE"
 
     export PYTHONIOENCODING=utf8
 
