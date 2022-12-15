@@ -21,12 +21,12 @@ semver_increment() {
     m) minor=true ;;
     p) patch=true ;;
     esac
-  done < <(echo -n "$$2")
+  done < <(echo -n "$2")
 
   local a
   local vFlag
 
-  a=(${$1//./ })
+  a=(${1//./ })
 
   if [ "${a[0]:0:1}" == "v" ]; then
     a[0]="${a[0]:1}"
