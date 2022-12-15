@@ -4,7 +4,7 @@
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
 # shellcheck source=src/scripts/utils.sh
-source ./utils.sh
+source src/scripts/utils.sh
 
 SourceParamaters
 
