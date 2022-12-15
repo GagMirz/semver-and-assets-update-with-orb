@@ -8,7 +8,7 @@
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
 
-source "${cnfp}"
+source ${cnfp}
 echo 1
 SourceParameters
 echo 2
