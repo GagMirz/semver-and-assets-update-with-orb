@@ -53,5 +53,5 @@ semver_increment() {
 
   echo "${version}"
 }
-ehco "$(semver_increment "${version}" "${option}")"
+echo "$(semver_increment "${version}" "${option}")"
 CreateAnswer "${answer}" "$(semver_increment \"${version}\" \"${option}\")"
