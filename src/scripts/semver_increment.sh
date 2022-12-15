@@ -5,7 +5,7 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
-# shellcheck source=./utils.sh
+# shellcheck source=scripts/utils.sh
 source ./utils.sh
 
 SourceParamaters
