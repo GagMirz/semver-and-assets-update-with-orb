@@ -9,5 +9,5 @@ SourceParameters() {
     else
         [[ "${1}" == "required" ]] && exit 127
     fi
-    echo 4
+    # echo 4
 }
