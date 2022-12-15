@@ -5,7 +5,6 @@
 
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
-
 SourceParameters
 
 # Add default values

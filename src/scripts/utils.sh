@@ -12,3 +12,7 @@ SourceParameters() {
         fi
     fi
 }
+
+CreateAnswer() {
+    echo "export $1=\"$2\" >>"$BASH_ENV"
+}
