@@ -9,7 +9,7 @@ SourceParameters() {
         echo 2
         source "${cnfp}"
     else
-        echo 3
         [[ "${1}" == "required" ]] && exit 127
     fi
+    echo 4
 }
