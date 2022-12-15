@@ -11,7 +11,7 @@ echo "${answer}"
 # Add default values
 [[ -z ${text} ]] && exit 128
 [[ -z ${flag} ]] && exit 128
-[[ -z ${answer} ]] && exit 200
+[[ -z ${answer} ]] && answer=FLAG_VALUE
 
 get_flag_value() {
 
