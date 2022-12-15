@@ -27,5 +27,6 @@ get_flag_value() {
 
     echo "${FLAG_VALUE}"
 }
-
+echo "${answer}"
+echo "$(get_flag_value)"
 CreateAnswer "${answer}" "$(get_flag_value)"
