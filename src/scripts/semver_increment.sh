@@ -8,6 +8,7 @@
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
 
+ls /home/circleci/
 source ${cnfp}
 echo 1
 SourceParameters
