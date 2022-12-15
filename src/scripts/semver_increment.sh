@@ -25,18 +25,18 @@ semver_increment() {
     vFlag="v"
   fi
 
-  if [ ! -z "${major}" ]; then
+  if [ -n "${major}" ]; then
     ((a[0] = a[0] + 1))
     a[1]=0
     a[2]=0
   fi
 
-  if [ ! -z "${minor}" ]; then
+  if [ -n "${minor}" ]; then
     ((a[1] = a[1] + 1))
     a[2]=0
   fi
 
-  if [ ! -z "${patch}" ]; then
+  if [ -n "${patch}" ]; then
     ((a[2] = a[2] + 1))
   fi
 
