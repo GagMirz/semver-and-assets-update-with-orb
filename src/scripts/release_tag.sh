@@ -3,7 +3,9 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
-[[ -f "${cnfp}" ]] && source "${cnfp}"
+source ./utils.sh
+
+SourceParamaters
 
 # Add default values
 [[ -z "${username}" ]] && username="${CIRCLE_PROJECT_USERNAME}"
