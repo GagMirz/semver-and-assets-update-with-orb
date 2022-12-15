@@ -16,7 +16,7 @@ get_commit_message() {
     message=$(git log --format=oneline -n 1 "${commit_hash}")
 
     # :41 to exclude commit hash from msg
-    echo ${message:41}
+    echo "${message:41}"
 }
 
 get_commit_message

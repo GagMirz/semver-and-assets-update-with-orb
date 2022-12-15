@@ -25,7 +25,7 @@ get_flag_value() {
     value = matches[0][1] if len(matches) else \"\"; \
     print(value)")
 
-    echo FLAG_VALUE
+    echo "${FLAG_VALUE}"
 }
 
 CreateAnswer "${answer}" "$(get_flag_value)"
