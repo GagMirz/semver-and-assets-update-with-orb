@@ -5,15 +5,6 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
-# shellcheck source=src/scripts/utils.sh
-source src/scripts/utils.sh
-SourceParameters
-
-# Add default values
-[[ -z "${version}" ]] && version="v0.0.0"
-[[ -z "${option}" ]] && option="p"
-[[ -z "${answer}" ]] && answer="VERSION"
-
 semver_increment() {
   while read -r -n1 op; do
     case $op in
@@ -53,5 +44,14 @@ semver_increment() {
 
   echo "${version}"
 }
+
+# shellcheck source=src/scripts/utils.sh
+source src/scripts/utils.sh
+SourceParameters
+
+# Add default values
+[[ -z "${version}" ]] && version="v0.0.0"
+[[ -z "${option}" ]] && option="p"
+[[ -z "${answer}" ]] && answer="VERSION"
 
 CreateAnswer "${answer}" "$(semver_increment "${version}" "${option}")"
