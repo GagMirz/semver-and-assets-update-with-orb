@@ -17,8 +17,8 @@ get_flag_value() {
 
     export PYTHONIOENCODING=utf8
 
-    local FLAG_VALUE
-    FLAG_VALUE=$(python3 -c "import re; \
+    local flag_value
+    flag_value=$(python3 -c "import re; \
     text = \"${text}\"; \
     matches = re.findall( \
         r'(?<=[-{1,2}|\/])(?P<name>[a-zA-Z0-9]*)[ |:|\\\"]*(?P<value>[\w]*)(?=[ |\\\"]|$)', \
@@ -27,7 +27,7 @@ get_flag_value() {
     value = matches[0][1] if len(matches) else \"\"; \
     print(value);")
 
-    echo "${FLAG_VALUE}"
+    echo "${flag_value}"
 }
 
 CreateAnswer "${answer}" "$(get_flag_value)"

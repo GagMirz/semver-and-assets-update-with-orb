@@ -13,6 +13,12 @@ SourceParameters
 [[ -z "${token}" ]] && token=""
 [[ -z "${answer}" ]] && answer="TAG"
 
+get_release_tag() {
 
-tag=$(curl "https://api.github.com/repos/${username}/${repository}/releases/latest" -s -H "Authorization: ${token}"| jq .name -r)
-CreateAnswer "${answer}" "${tag}"
+    local tag
+    tag=$(curl "https://api.github.com/repos/${username}/${repository}/releases/latest" -s -H "Authorization: ${token}" | jq .name -r)
+
+    echo "${tag}"
+}
+
+CreateAnswer "${answer}" "$(get_release_tag)"
