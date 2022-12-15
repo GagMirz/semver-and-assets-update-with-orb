@@ -9,10 +9,9 @@
 source src/scripts/utils.sh
 
 ls -la /home/circleci/
-source ${cnfp}
-echo 1
+
 SourceParameters
-echo 2
+
 # Add default values
 [[ -z "${version}" ]] && version="v0.0.0"
 [[ -z "${option}" ]] && option="p"
