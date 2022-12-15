@@ -6,5 +6,5 @@
 SourceParameters() {
     echo "${cnfp}"
     [[ -f "${cnfp}" ]] && echo "exists"
-    [[ -f "${cnfp}" ]] && source "${cnfp}" || [[ "${1}" == "required" ]] && exit 127
+    [[ -f "${cnfp}" ]] && source ${cnfp} || [[ "${1}" == "required" ]] && exit 127
 }
