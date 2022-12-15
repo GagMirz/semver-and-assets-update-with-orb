@@ -13,10 +13,10 @@ SourceParameters
 
 get_commit_message() {
     local message
-    message=$(git log --format=oneline -n 1 "${commit_hash}")
+    message=$(git log --format=oneline -n 1 "${1}")
 
     # :41 to exclude commit hash from msg
     echo "${message:41}"
 }
 
-CreateAnswer "${answer}" "$(get_commit_message)"
+CreateAnswer "${answer}" "$(get_commit_message "${commit_hash}")"
