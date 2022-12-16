@@ -22,7 +22,7 @@ SourceParameters() {
         fi
     fi
 
-    exit 0
+    return 0
 }
 
 #######################################
@@ -33,10 +33,11 @@ SourceParameters() {
 #   Variable name
 #   Variable value
 # RETURN:
-#   0 if print succeeds, non-zero on error.
+#   0 if print succeeds
+#   non-zero on error.
 #######################################
 CreateAnswer() {
     echo "export $1=\"$2\"" >>"$BASH_ENV"
-
-    exit 0
+    
+    return 0
 }
