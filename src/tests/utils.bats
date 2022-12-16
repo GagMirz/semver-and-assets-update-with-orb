@@ -47,7 +47,7 @@ setup() {
 }
 
 # 3 Should throw error when
-@test "3.1 file path is wrong, required tag missing" {
+@test "3.1 file path is wrong, required tag given" {
     run SourceParameters "/some/unknown/path/to_file" "required"
 
     [ "${status}" == "127" ]
