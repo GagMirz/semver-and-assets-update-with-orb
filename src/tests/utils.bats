@@ -46,7 +46,7 @@ setup() {
 
 # 3 Should throw error when
 @test "3.1 file path is wrong, required tag missing" {
-    $(SourceParameters "/some/unknown/path/to_file" "required")
+    SourceParameters "/some/unknown/path/to_file" "required"
 
     [ "${?}" == "127" ]
 }
