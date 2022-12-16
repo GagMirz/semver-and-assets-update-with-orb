@@ -14,5 +14,5 @@ setup() {
 
     SourceParameters "${config_file}"
     echo "HERE"
-    [[ "${NEW_PARAMETER}" == "value"]] # Check for no exit error
+    [ "${NEW_PARAMETER}" == "value"] # Check for no exit error
 }
