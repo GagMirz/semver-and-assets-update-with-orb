@@ -1,10 +1,9 @@
 #!/usr/bin/env bats
 
 setup() {
-    source "$PROJECT_ROOT/src/helper.sh"
-    load 'test_helper/bats-assert/load'
+    load "test_helper/bats-assert/load"
     
-    source ./src/scripts/utils.sh
+    source "./src/scripts/utils.sh"
 }
 
 # 1 Should load file when
