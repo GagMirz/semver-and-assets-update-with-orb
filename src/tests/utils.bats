@@ -2,6 +2,7 @@
 
 setup() {
     source ./src/scripts/utils.sh
+    load 'test_helper/bats-assert/load'
 }
 
 # 1 Should load file when
@@ -13,6 +14,6 @@ setup() {
     echo "NEW_PARAMETER=value" > $config_file
 
     SourceParameters "${config_file}"
-    
-    [ "${NEW_PARAMETER}" == "value" ] # Check for no exit error
+
+    assert_equal "${NEW_PARAMETER}" "value" # Check for no exit error
 }
