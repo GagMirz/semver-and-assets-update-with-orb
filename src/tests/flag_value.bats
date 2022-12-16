@@ -54,3 +54,18 @@ setup() {
     [ "${output}" == "" ]
     [ "${status}" == "0" ]
 }
+
+# 3 Should throw error when
+@test "3.1 text given, flag not given" {
+    run get_flag_value "" "r"
+
+    [ "${status}" == "129" ]
+    [ "${output}" == "" ]
+}
+
+@test "3.2 text not given, flag given" {
+    run get_flag_value "some text with -t tip_flag -f fake_flag -n new_flag -m meaningless_flag" ""
+
+    [ "${status}" == "130" ]
+    [ "${output}" == "" ]
+}
