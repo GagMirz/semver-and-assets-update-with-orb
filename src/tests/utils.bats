@@ -76,14 +76,14 @@ setup() {
 }
 
 # 5 Should throw an error when
-@test "5.1 variable name not given, value given"
-    # run CreateAnswer "" "variable_value" 
+@test "5.1 variable name not given, value given" {
+    run CreateAnswer "" "variable_value" 
 
-    # [ "${status}" == "128" ] # Check if variable was created and is empty
-    # [ "${option}" == "" ] # Check if variable was created and is empty
+    [ "${status}" == "128" ] # Check if variable was created and is empty
+    [ "${option}" == "" ] # Check if variable was created and is empty
 }
 
-@test "5.2 variable name not given, value not given"
+@test "5.2 variable name not given, value not given" {
     run CreateAnswer 
 
     [ "${status}" == "128" ] # Check if variable was created and is empty
