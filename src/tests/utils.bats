@@ -3,8 +3,8 @@
 setup() {
     source "./src/scripts/utils.sh"
     
-    touch "~/.bash_test"
-    BASH_ENV="~/.bash_test"
+    touch "$HOME/.bash_test"
+    BASH_ENV="$HOME/.bash_test"
 }
 
 # SourceParameters()
