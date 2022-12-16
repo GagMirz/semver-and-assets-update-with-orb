@@ -67,3 +67,9 @@ SourceParameters "${cnfp}"
 [[ -z "${answer}" ]] && answer="VERSION"
 
 CreateAnswer "${answer}" "$(semver_increment "${version}" "${option}")"
+
+
+ORB_TEST_ENV="bats-core"
+echo ORB_TEST_ENV
+echo "${0#*"$ORB_TEST_ENV"}"
+echo $0
