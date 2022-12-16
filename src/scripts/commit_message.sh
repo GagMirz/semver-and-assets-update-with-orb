@@ -22,12 +22,17 @@ get_commit_message() {
     return 0
 }
 
-# shellcheck source=src/scripts/utils.sh
-source src/scripts/utils.sh
-SourceParameters "${cnfp}"
+# Will not run if sourced from another script.
+# This is done so this script may be tested.
+ORB_TEST_ENV="bats-core"
+if [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
+    # shellcheck source=src/scripts/utils.sh
+    source src/scripts/utils.sh
+    SourceParameters "${cnfp}"
 
-# Add default values
-[[ -z "${commit_hash}" ]] && commit_hash=$CIRCLE_SHA1
-[[ -z "${answer}" ]] && answer="COMMIT_MESSAGE"
+    # Add default values
+    [[ -z "${commit_hash}" ]] && commit_hash=$CIRCLE_SHA1
+    [[ -z "${answer}" ]] && answer="COMMIT_MESSAGE"
 
-CreateAnswer "${answer}" "$(get_commit_message "${commit_hash}")"
+    CreateAnswer "${answer}" "$(get_commit_message "${commit_hash}")"
+fi

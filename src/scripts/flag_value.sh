@@ -30,14 +30,19 @@ get_flag_value() {
     return 0
 }
 
-# shellcheck source=src/scripts/utils.sh
-source src/scripts/utils.sh
-SourceParameters "${cnfp}" required
-echo "${answer}"
+# Will not run if sourced from another script.
+# This is done so this script may be tested.
+ORB_TEST_ENV="bats-core"
+if [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
+    # shellcheck source=src/scripts/utils.sh
+    source src/scripts/utils.sh
+    SourceParameters "${cnfp}" required
+    echo "${answer}"
 
-# Add default values
-[[ -z ${text} ]] && exit 128
-[[ -z ${flag} ]] && exit 128
-[[ -z ${answer} ]] && answer="FLAG_VALUE"
+    # Add default values
+    [[ -z ${text} ]] && exit 128
+    [[ -z ${flag} ]] && exit 128
+    [[ -z ${answer} ]] && answer="FLAG_VALUE"
 
-CreateAnswer "${answer}" "$(get_flag_value "${text}" "${flag}")"
+    CreateAnswer "${answer}" "$(get_flag_value "${text}" "${flag}")"
+fi

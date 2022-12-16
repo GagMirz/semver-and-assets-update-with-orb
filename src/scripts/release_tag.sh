@@ -23,14 +23,19 @@ get_release_tag() {
     return 0
 }
 
-# shellcheck source=src/scripts/utils.sh
-source src/scripts/utils.sh
-SourceParameters "${cnfp}"
+# Will not run if sourced from another script.
+# This is done so this script may be tested.
+ORB_TEST_ENV="bats-core"
+if [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
+    # shellcheck source=src/scripts/utils.sh
+    source src/scripts/utils.sh
+    SourceParameters "${cnfp}"
 
-# Add default values
-[[ -z "${username}" ]] && username="${CIRCLE_PROJECT_USERNAME}"
-[[ -z "${repository}" ]] && repository="${CIRCLE_PROJECT_REPONAME}"
-[[ -z "${token}" ]] && token=""
-[[ -z "${answer}" ]] && answer="TAG"
+    # Add default values
+    [[ -z "${username}" ]] && username="${CIRCLE_PROJECT_USERNAME}"
+    [[ -z "${repository}" ]] && repository="${CIRCLE_PROJECT_REPONAME}"
+    [[ -z "${token}" ]] && token=""
+    [[ -z "${answer}" ]] && answer="TAG"
 
-CreateAnswer "${answer}" "$(get_release_tag "${username}" "${repository}" "${token}")"
+    CreateAnswer "${answer}" "$(get_release_tag "${username}" "${repository}" "${token}")"
+fi
