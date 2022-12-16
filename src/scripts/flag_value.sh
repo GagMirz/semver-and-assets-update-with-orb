@@ -14,6 +14,9 @@
 #   non-zero on error
 #######################################
 get_flag_value() {
+    [[ -z "${1}" ]] exit 128
+    [[ -z "${2}" ]] exit 129
+
     export PYTHONIOENCODING=utf8
 
     local flag_value
