@@ -1,8 +1,6 @@
 #!/usr/bin/env bats
 
 setup() {
-    load "test_helper/bats-assert/load"
-    
     source "./src/scripts/utils.sh"
 }
 
@@ -16,5 +14,6 @@ setup() {
 
     SourceParameters "${config_file}"
 
-    assert_equal "${NEW_PARAMETER}" "value" # Check for no exit error
+    [ -n "${NEW_PARAMETER}" ] # CHeck for existance
+    [ "${NEW_PARAMETER}" == "value" ] # Check for value
 }
