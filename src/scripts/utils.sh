@@ -6,7 +6,7 @@
 # 1 is configuration file required or not
 SourceParameters() {
     if [[ -f "${1}" ]]; then
-        source "${2}"
+        source "${1}"
     else
         if [[ "${2}" == "required" ]]; then
             exit 127
