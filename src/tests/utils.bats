@@ -29,7 +29,7 @@ setup() {
     echo "FIRST_PARAMETER=first_value" > $config_file
     echo "SECOND_PARAMETER=second_value" >> $config_file
 
-    run SourceParameters "${config_file}" "required"
+    SourceParameters "${config_file}" "required"
 
     [ "${status}" == "0" ]
     [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
