@@ -13,7 +13,7 @@ get_commit_message() {
 
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
-SourceParameters
+SourceParameters "${cnfp}"
 
 # Add default values
 [[ -z "${commit_hash}" ]] && commit_hash=$CIRCLE_SHA1

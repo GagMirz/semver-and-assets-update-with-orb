@@ -21,12 +21,12 @@ get_flag_value() {
 
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
-SourceParameters required
+SourceParameters "${cnfp}" required
 echo "${answer}"
 
 # Add default values
 [[ -z ${text} ]] && exit 128
 [[ -z ${flag} ]] && exit 128
-[[ -z ${answer} ]] && answer=FLAG_VALUE
+[[ -z ${answer} ]] && answer="FLAG_VALUE"
 
 CreateAnswer "${answer}" "$(get_flag_value "${text}" "${flag}")"

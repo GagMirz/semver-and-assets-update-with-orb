@@ -12,7 +12,7 @@ get_release_tag() {
 
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
-SourceParameters
+SourceParameters "${cnfp}"
 
 # Add default values
 [[ -z "${username}" ]] && username="${CIRCLE_PROJECT_USERNAME}"

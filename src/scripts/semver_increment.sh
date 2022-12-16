@@ -47,7 +47,7 @@ semver_increment() {
 
 # shellcheck source=src/scripts/utils.sh
 source src/scripts/utils.sh
-SourceParameters
+SourceParameters "${cnfp}"
 
 # Add default values
 [[ -z "${version}" ]] && version="v0.0.0"
