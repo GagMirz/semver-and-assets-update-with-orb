@@ -15,10 +15,10 @@ setup() {
 
     SourceParameters "${config_file}"
 
-    [ "${?}" == "0" ]
-    [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
+    [ "${?}" == "0" ] # Check status to be 0
+    [ -n "${FIRST_PARAMETER}" ] # Check for existance
     [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
-    [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
+    [ -n "${SECOND_PARAMETER}" ] # Check for existance
     [ "${SECOND_PARAMETER}" == "second_value" ] # Check for value
 }
 
@@ -32,10 +32,10 @@ setup() {
 
     SourceParameters "${config_file}" "required"
 
-    [ "${?}" == "0" ]
-    [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
+    [ "${?}" == "0" ] # Check status to be 0
+    [ -n "${FIRST_PARAMETER}" ] # Check for existance
     [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
-    [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
+    [ -n "${SECOND_PARAMETER}" ] # Check for existance
     [ "${SECOND_PARAMETER}" == "second_value" ] # Check for value
 }
 
@@ -43,12 +43,12 @@ setup() {
 @test "2.1 file path is wrong, required tag missing" {
     run SourceParameters "/some/unknown/path/to_file"
 
-    [ "${status}" == "0" ]
+    [ "${status}" == "0" ] # Check status to be 0
 }
 
 # 3 Should throw error when
 @test "3.1 file path is wrong, required tag given" {
     run SourceParameters "/some/unknown/path/to_file" "required"
 
-    [ "${status}" == "127" ]
+    [ "${status}" == "127" ] # Check status to be 127
 }
