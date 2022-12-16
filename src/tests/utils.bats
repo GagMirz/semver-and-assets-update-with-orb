@@ -50,7 +50,7 @@ setup() {
     [ "${status}" == "0" ] # Check status to be 0
 }
 
-# 3 Should throw error when
+# 3 Should throw an error when
 @test "3.1 file path is wrong, required tag given" {
     run SourceParameters "/some/unknown/path/to_file" "required"
 
@@ -59,10 +59,33 @@ setup() {
 
 # CreateAnswer()
 # 4 Should create invironment variable when
-@test "4.1 variable given, value given" {
-    CreateAnswer "VariableName" "VariableValue"
+@test "4.1 variable name given, value given" {
+    CreateAnswer "VariableName" "variable_value"
 
     source $BASH_ENV
 
-    [ "${VariableName}" == "VariableValue" ] # Check if variable was created
+    [ "${VariableName}" == "variable_value" ] # Check if variable was created and has correct value
+}
+
+@test "4.2 variable name given, value not given" {
+    CreateAnswer "VariableName" 
+
+    source $BASH_ENV
+
+    [ "${VariableName}" == "" ] # Check if variable was created and is empty
+}
+
+# 5 Should throw an error when
+@test "5.1 variable name not given, value given"
+    run CreateAnswer "" "variable_value" 
+
+    [ "${status}" == "128" ] # Check if variable was created and is empty
+    [ "${option}" == "" ] # Check if variable was created and is empty
+}
+
+@test "5.1 variable name not given, value not given"
+    run CreateAnswer 
+
+    [ "${status}" == "128" ] # Check if variable was created and is empty
+    [ "${option}" == "" ] # Check if variable was created and is empty
 }

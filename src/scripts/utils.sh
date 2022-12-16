@@ -35,7 +35,7 @@ SourceParameters() {
 #   non-zero on error.
 #######################################
 CreateAnswer() {
-    [[ -z "${1}" ]] && exit 129
+    [[ -z "${1}" ]] && exit 128
 
     echo "export $1=\"$2\"" >>"$BASH_ENV"
 

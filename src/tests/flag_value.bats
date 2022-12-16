@@ -55,7 +55,7 @@ setup() {
     [ "${status}" == "0" ] # Check status to be 0
 }
 
-# 3 Should throw error when
+# 3 Should throw an error when
 @test "3.1 text given, flag not given" {
     run get_flag_value "" "r"
 
