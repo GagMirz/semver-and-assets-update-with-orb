@@ -15,5 +15,5 @@ setup() {
     SourceParameters "${config_file}"
 
     [ -n "${NEW_PARAMETER}" ] # CHeck for existance
-    [ "${NEW_PARAMETER}" == "value" ] # Check for value
+    [ "${NEW_PARAMETER}" != "value" ] # Check for value
 }
