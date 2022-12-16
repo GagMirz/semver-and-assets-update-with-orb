@@ -83,7 +83,7 @@ setup() {
     [ "${option}" == "" ] # Check if variable was created and is empty
 }
 
-@test "5.1 variable name not given, value not given"
+@test "5.2 variable name not given, value not given"
     run CreateAnswer 
 
     [ "${status}" == "128" ] # Check if variable was created and is empty
