@@ -69,3 +69,10 @@ setup() {
     [ "${status}" == "130" ]
     [ "${output}" == "" ]
 }
+
+@test "3.2 text not given, flag not given" {
+    run get_flag_value "" ""
+
+    [ "${status}" == "129" ]
+    [ "${output}" == "" ]
+}
