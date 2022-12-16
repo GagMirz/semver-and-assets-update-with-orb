@@ -13,6 +13,6 @@ setup() {
     echo "NEW_PARAMETER=value" > $config_file
 
     SourceParameters "${config_file}"
-    echo "HERE"
-    [ "${NEW_PARAMETER}" == "value"] # Check for no exit error
+    
+    [ "${NEW_PARAMETER}" == "value" ] # Check for no exit error
 }
