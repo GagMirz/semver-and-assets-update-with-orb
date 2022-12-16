@@ -10,10 +10,29 @@ setup() {
     touch "/home/circleci/.test.utils.config "
     config_file="/home/circleci/.test.utils.config"
 
-    echo "NEW_PARAMETER=value" > $config_file
+    echo "FIRST_PARAMETER=first_value" > $config_file
+    echo "SECOND_PARAMETER=second_value" >> $config_file
 
     SourceParameters "${config_file}"
 
-    [ -n "${NEW_PARAMETER}" ] # CHeck for existance
-    [ "${NEW_PARAMETER}" != "value" ] # Check for value
+    [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
+    [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
+    [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
+    [ "${SECOND_PARAMETER}" == "second_value" ] # Check for value
+}
+
+@test "1.2 config file give, required tag given" {
+    mkdir -p "/home/circleci/"
+    touch "/home/circleci/.test.utils.config "
+    config_file="/home/circleci/.test.utils.config"
+
+    echo "FIRST_PARAMETER=first_value" > $config_file
+    echo "SECOND_PARAMETER=second_value" >> $config_file
+
+    SourceParameters "${config_file}" "required"
+
+    [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
+    [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
+    [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
+    [ "${SECOND_PARAMETER}" == "second_value" ] # Check for value
 }
