@@ -3,6 +3,9 @@
 setup() {
     source ./src/scripts/utils.sh
     load 'test_helper/bats-assert/load'
+    
+    DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )"
+    PATH="$DIR/../src:$PATH"
 }
 
 # 1 Should load file when
