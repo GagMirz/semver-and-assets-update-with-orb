@@ -29,8 +29,9 @@ setup() {
     echo "FIRST_PARAMETER=first_value" > $config_file
     echo "SECOND_PARAMETER=second_value" >> $config_file
 
-    SourceParameters "${config_file}" "required"
+    run SourceParameters "${config_file}" "required"
 
+    [ "${status}" == "0" ]
     [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
     [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
     [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
@@ -39,9 +40,9 @@ setup() {
 
 # 2 Shouldn't load file when
 @test "2.1 file path is wrong, required tag missing" {
-    SourceParameters "/some/unknown/path/to_file"
+    run SourceParameters "/some/unknown/path/to_file"
 
-    [ "${?}" == "0" ]
+    [ "${status}" == "0" ]
 }
 
 # 3 Should throw error when
