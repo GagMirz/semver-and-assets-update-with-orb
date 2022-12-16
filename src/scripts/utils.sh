@@ -25,7 +25,7 @@ SourceParameters() {
 }
 
 #######################################
-# Create answer variable and insert into shared file 
+# Create answer variable and insert into shared file
 # GLOBALS:
 #   BASH_ENV
 # ARGUMENTS:
@@ -35,7 +35,9 @@ SourceParameters() {
 #   non-zero on error.
 #######################################
 CreateAnswer() {
+    [[ -z "${1}" ]] && exit 129
+
     echo "export $1=\"$2\"" >>"$BASH_ENV"
-    
+
     return 0
 }

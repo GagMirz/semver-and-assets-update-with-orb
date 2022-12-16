@@ -2,23 +2,27 @@
 
 setup() {
     source "./src/scripts/utils.sh"
+    
+    touch "/home/.bash_test"
+    BASH_ENV="/home/.bash_test"
 }
 
+# SourceParameters()
 # 1 Should load file when
 @test "1.1: config file given, required tag missing" {
     mkdir -p "/home/circleci/"
     touch "/home/circleci/.test.utils.config "
     config_file="/home/circleci/.test.utils.config"
 
-    echo "FIRST_PARAMETER=first_value" > $config_file
-    echo "SECOND_PARAMETER=second_value" >> $config_file
+    echo "FIRST_PARAMETER=first_value" >$config_file
+    echo "SECOND_PARAMETER=second_value" >>$config_file
 
     SourceParameters "${config_file}"
 
-    [ "${?}" == "0" ] # Check status to be 0
-    [ -n "${FIRST_PARAMETER}" ] # Check for existance
-    [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
-    [ -n "${SECOND_PARAMETER}" ] # Check for existance
+    [ "${?}" == "0" ]                           # Check status to be 0
+    [ -n "${FIRST_PARAMETER}" ]                 # Check for existance
+    [ "${FIRST_PARAMETER}" == "first_value" ]   # Check for value
+    [ -n "${SECOND_PARAMETER}" ]                # Check for existance
     [ "${SECOND_PARAMETER}" == "second_value" ] # Check for value
 }
 
@@ -27,15 +31,15 @@ setup() {
     touch "/home/circleci/.test.utils.config "
     config_file="/home/circleci/.test.utils.config"
 
-    echo "FIRST_PARAMETER=first_value" > $config_file
-    echo "SECOND_PARAMETER=second_value" >> $config_file
+    echo "FIRST_PARAMETER=first_value" >$config_file
+    echo "SECOND_PARAMETER=second_value" >>$config_file
 
     SourceParameters "${config_file}" "required"
 
-    [ "${?}" == "0" ] # Check status to be 0
-    [ -n "${FIRST_PARAMETER}" ] # Check for existance
-    [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
-    [ -n "${SECOND_PARAMETER}" ] # Check for existance
+    [ "${?}" == "0" ]                           # Check status to be 0
+    [ -n "${FIRST_PARAMETER}" ]                 # Check for existance
+    [ "${FIRST_PARAMETER}" == "first_value" ]   # Check for value
+    [ -n "${SECOND_PARAMETER}" ]                # Check for existance
     [ "${SECOND_PARAMETER}" == "second_value" ] # Check for value
 }
 
@@ -51,4 +55,14 @@ setup() {
     run SourceParameters "/some/unknown/path/to_file" "required"
 
     [ "${status}" == "127" ] # Check status to be 127
+}
+
+# CreateAnswer()
+# 4 Should create invironment variable when
+@test "4.1 variable given, value given" {
+    CreateAnswer "VariableName" "VariableValue"
+
+    source $BASH_ENV
+
+    [ "${VariableName}" == "VariableValue" ] # Check if variable was created
 }
