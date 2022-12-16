@@ -3,11 +3,24 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
+#######################################
+# Get commit message
+# ARGUMENTS:
+#   User/organization name
+#   Repository name
+#   Git access token
+# OUTPUTS:
+#   Git last tag release tag
+# RETURN:
+#   non-zero on error
+#######################################
 get_release_tag() {
     local tag
     tag=$(curl "https://api.github.com/repos/${1}/${2}/releases/latest" -s -H "Authorization: ${3}" | jq .name -r)
 
     echo "${tag}"
+
+    return 0
 }
 
 # shellcheck source=src/scripts/utils.sh

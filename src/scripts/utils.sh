@@ -9,7 +9,6 @@
 #   Path to configuration file
 #   Is file required or no
 # RETURN:
-#   0 if print succeeds
 #   127 if file is required and missing
 #   non-zero on other errors
 #######################################
@@ -33,7 +32,6 @@ SourceParameters() {
 #   Variable name
 #   Variable value
 # RETURN:
-#   0 if print succeeds
 #   non-zero on error.
 #######################################
 CreateAnswer() {

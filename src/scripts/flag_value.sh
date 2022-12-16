@@ -3,6 +3,16 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
+#######################################
+# Get given flag value from a string
+# ARGUMENTS:
+#   String with flags
+#   Flag F.E. r/l/some_flag
+# OUTPUTS:
+#   Value of given flag
+# RETURN:
+#   non-zero on error
+#######################################
 get_flag_value() {
     export PYTHONIOENCODING=utf8
 
@@ -17,6 +27,7 @@ get_flag_value() {
     print(value);")
 
     echo "${flag_value}"
+    return 0
 }
 
 # shellcheck source=src/scripts/utils.sh

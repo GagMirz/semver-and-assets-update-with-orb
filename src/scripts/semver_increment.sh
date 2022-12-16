@@ -4,6 +4,16 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
+#######################################
+# Increment given SemVer string with given level option
+# ARGUMENTS:
+#   SemVer string
+#   Increase option F.E. M/m/p/Mm/mp/Mp/Mmp
+# OUTPUTS:
+#   Incremented SemVer string
+# RETURN:
+#   non-zero on error
+#######################################
 semver_increment() {
   while read -r -n1 op; do
     case $op in
@@ -43,6 +53,8 @@ semver_increment() {
   version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
 
   echo "${version}"
+
+  return 0
 }
 
 # shellcheck source=src/scripts/utils.sh

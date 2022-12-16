@@ -3,12 +3,23 @@
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
+#######################################
+# Get commit message
+# ARGUMENTS:
+#   Commit hash
+# OUTPUTS:
+#   Commit message with excluded commit hash
+# RETURN:
+#   non-zero on error
+#######################################
 get_commit_message() {
     local message
     message=$(git log --format=oneline -n 1 "${1}")
 
     # :41 to exclude commit hash from msg
     echo "${message:41}"
+
+    return 0
 }
 
 # shellcheck source=src/scripts/utils.sh
