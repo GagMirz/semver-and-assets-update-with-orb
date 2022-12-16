@@ -15,6 +15,7 @@ setup() {
 
     SourceParameters "${config_file}"
 
+    [ "${?}" == "0" ]
     [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
     [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
     [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
@@ -31,7 +32,7 @@ setup() {
 
     SourceParameters "${config_file}" "required"
 
-    [ "${status}" == "0" ]
+    [ "${?}" == "0" ]
     [ -n "${FIRST_PARAMETER}" ] # CHeck for existance
     [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
     [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
