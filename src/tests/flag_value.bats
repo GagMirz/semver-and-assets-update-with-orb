@@ -18,3 +18,24 @@ setup() {
     [ "${output}" == "flag" ]
     [ "${status}" == "0" ]
 }
+
+@test "1.3 text given, flag given, text contains flag and value, text contains other flags before given" {
+    run get_flag_value "some text with -t tip_flag -f fake_flag -r flag" "r"
+
+    [ "${output}" == "flag" ]
+    [ "${status}" == "0" ]
+}
+
+@test "1.3 text given, flag given, text contains flag and value, text contains other flags after given" {
+    run get_flag_value "some text with -r flag -t tip_flag -f fake_flag" "r"
+
+    [ "${output}" == "flag" ]
+    [ "${status}" == "0" ]
+}
+
+@test "1.3 text given, flag given, text contains flag and value, text contains other flags before and after given" {
+    run get_flag_value "some text with -t tip_flag -f fake_flag -r flag -n new_flag -m meaningless_flag" "r"
+
+    [ "${output}" == "flag" ]
+    [ "${status}" == "0" ]
+}
