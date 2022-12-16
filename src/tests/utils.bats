@@ -5,7 +5,7 @@ setup() {
 }
 
 # 1 Should load file when
-@test "1.1: config file given, required tag missing " {
+@test "1.1: config file given, required tag missing" {
     mkdir -p "/home/circleci/"
     touch "/home/circleci/.test.utils.config "
     config_file="/home/circleci/.test.utils.config"
@@ -35,4 +35,18 @@ setup() {
     [ "${FIRST_PARAMETER}" == "first_value" ] # Check for value
     [ -n "${SECOND_PARAMETER}" ] # CHeck for existance
     [ "${SECOND_PARAMETER}" == "second_value" ] # Check for value
+}
+
+# 2 Shouldn't load file when
+@test "2.1 file path is wrong, required tag missing" {
+    SourceParameters "/some/unknown/path/to_file"
+
+    [ "${?}" == "0"]
+}
+
+# 3 Should throw error when
+@test "3.1 file path is wrong, required tag missing" {
+    $(SourceParameters "/some/unknown/path/to_file" "required")
+
+    [ "${?}" == "127"]
 }
