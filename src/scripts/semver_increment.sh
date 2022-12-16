@@ -57,19 +57,18 @@ semver_increment() {
   return 0
 }
 
-# shellcheck source=src/scripts/utils.sh
-source src/scripts/utils.sh
-SourceParameters "${cnfp}"
-
-# Add default values
-[[ -z "${version}" ]] && version="v0.0.0"
-[[ -z "${option}" ]] && option="p"
-[[ -z "${answer}" ]] && answer="VERSION"
-
-CreateAnswer "${answer}" "$(semver_increment "${version}" "${option}")"
-
-
+# Will not run if sourced from another script.
+# This is done so this script may be tested.
 ORB_TEST_ENV="bats-core"
-echo ORB_TEST_ENV
-echo "${0#*"$ORB_TEST_ENV"}"
-echo $0
+if [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
+  # shellcheck source=src/scripts/utils.sh
+  source src/scripts/utils.sh
+  SourceParameters "${cnfp}"
+
+  # Add default values
+  [[ -z "${version}" ]] && version="v0.0.0"
+  [[ -z "${option}" ]] && option="p"
+  [[ -z "${answer}" ]] && answer="VERSION"
+
+  CreateAnswer "${answer}" "$(semver_increment "${version}" "${option}")"
+fi
