@@ -28,7 +28,6 @@ get_commit_message() {
 # This is done so this script may be tested.
 ORB_TEST_ENV="bats-core"
 if [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
-
     # Import utils.
     eval "$SCRIPT_UTILS"
     SourceParameters "${cnfp}"

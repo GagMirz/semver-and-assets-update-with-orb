@@ -14,3 +14,5 @@ steps:
   - run:
       name: "Get given flag value from a string"
       command: "<< include(scripts/flag_value.sh) >>"
+      environment:
+        SCRIPT_UTILS: "<<include(scripts/utils.sh)>>"
