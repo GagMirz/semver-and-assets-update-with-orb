@@ -37,7 +37,7 @@ steps:
         name: "test"
         command: |
             echo "${COMMIT_MESSAGE}"
-            echo "${FLAG_VALUE}"
+            echo "${#FLAG_VALUE}"
 
     - when:
           condition: ${FLAG_VALUE}

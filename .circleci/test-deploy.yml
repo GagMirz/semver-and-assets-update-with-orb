@@ -190,7 +190,7 @@ jobs:
       - run:
           name: "Should return empty string if flag not found"
           command:  |
-            [[ $VALUE == "" ]] && echo "Flag retrieved in new PARAMETER variable" || exit 147
+            [[ $VALUE == "" ]] && echo "Flag retrieved" || exit 147
 
       # Read message from git commit 
       # Exact checking not possible (value is dynamic)
