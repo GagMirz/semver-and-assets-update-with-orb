@@ -15,6 +15,9 @@
 #   non-zero on error
 #######################################
 semver_increment() {
+  [[ -z "${1}" ]] && exit 128
+  [[ -z "${2}" ]] && exit 129
+
   while read -r -n1 op; do
     case $op in
     M) major=true ;;

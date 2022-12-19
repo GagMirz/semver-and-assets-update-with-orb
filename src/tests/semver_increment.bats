@@ -85,7 +85,7 @@ setup() {
     [ "${status}" == "0" ]        # Check status to be 0
 }
 
-@test "1.4 version given, Mp option" {
+@test "1.5 version given, Mp option" {
     local option
     option="Mp"
 
@@ -105,7 +105,7 @@ setup() {
     [ "${status}" == "0" ]       # Check status to be 0
 }
 
-@test "1.4 version given, Mm option" {
+@test "1.6 version given, Mm option" {
     local option
     option="Mm"
 
@@ -125,7 +125,7 @@ setup() {
     [ "${status}" == "0" ]       # Check status to be 0
 }
 
-@test "1.4 version given, Mmp option" {
+@test "1.7 version given, Mmp option" {
     local option
     option="Mmp"
 
@@ -145,22 +145,64 @@ setup() {
     [ "${status}" == "0" ]       # Check status to be 0
 }
 
-@test "1.4 version given(doesn't contain v letter), any option" {
+@test "1.8 version given(doesn't contain v letter), any option" {
     local option
     option="Mmp"
 
     run semver_increment "0.0.0" "${option}"
 
     [ "${output}" == "1.1.1" ] # New tag retrieved
-    [ "${status}" == "0" ]      # Check status to be 0
+    [ "${status}" == "0" ]     # Check status to be 0
 
     run semver_increment "5.5.5" "${option}"
 
     [ "${output}" == "6.1.1" ] # New tag retrieved
-    [ "${status}" == "0" ]      # Check status to be 0
+    [ "${status}" == "0" ]     # Check status to be 0
 
     run semver_increment "10.10.10" "${option}"
 
     [ "${output}" == "11.1.1" ] # New tag retrieved
-    [ "${status}" == "0" ]       # Check status to be 0
+    [ "${status}" == "0" ]      # Check status to be 0
+}
+
+@test "1.9 version given(doesn't contain v letter), any option" {
+    local option
+    option="Mmp"
+
+    run semver_increment "0.0.0" "${option}"
+
+    [ "${output}" == "1.1.1" ] # New tag retrieved
+    [ "${status}" == "0" ]     # Check status to be 0
+
+    run semver_increment "5.5.5" "${option}"
+
+    [ "${output}" == "6.1.1" ] # New tag retrieved
+    [ "${status}" == "0" ]     # Check status to be 0
+
+    run semver_increment "10.10.10" "${option}"
+
+    [ "${output}" == "11.1.1" ] # New tag retrieved
+    [ "${status}" == "0" ]      # Check status to be 0
+}
+
+# 2 Should throw an error when
+@test "2.1 version not given, option given" {
+    run semver_increment "" "m"
+
+    [ "${status}" == "128" ] # Check status to be 0
+    [ "${output}" == "" ]    # New tag retrieved
+}
+
+@test "2.1 version given, option not given" {
+    run semver_increment "0.0.0" ""
+
+    [ "${status}" == "129" ] # Check status to be 0
+    [ "${output}" == "" ]    # New tag retrieved
+}
+
+@test "2.1 version not given, option not given" {
+    run semver_increment "" ""
+
+    [ "${status}" == "128" ] # Check status to be 0
+    [ "${output}" == "" ]    # New tag retrieved
 }
