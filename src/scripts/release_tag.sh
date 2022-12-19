@@ -15,6 +15,10 @@
 #   non-zero on error
 #######################################
 get_release_tag() {
+    # $3, token is not required if repo is publick
+    [[ -z "${1}" ]] && exit 128
+    [[ -z "${2}" ]] && exit 129
+    
     local tag
     tag=$(curl "https://api.github.com/repos/${1}/${2}/releases/latest" -s -H "Authorization: ${3}" | jq .name -r)
 
