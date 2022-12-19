@@ -23,7 +23,7 @@ setup() {
     run get_release_tag "" "${CIRCLE_PROJECT_REPONAME}"
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${output}" != "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }
 
 @test "2.2 username given, repository not given" {
@@ -31,5 +31,5 @@ setup() {
     run get_release_tag "${CIRCLE_PROJECT_USERNAME}" ""
 
     [ "${status}" == "129" ] # Check status to be 129
-    [ "${output}" != "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }
