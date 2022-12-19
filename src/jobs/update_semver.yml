@@ -33,6 +33,11 @@ steps:
             echo "flag=r" >> $config_path
     - flag_value
 
+    - run:
+        name: "test"
+        command: |
+            echo "${FLAG_VALUE}"
+
     - when:
           condition: ${FLAG_VALUE}
           steps:
