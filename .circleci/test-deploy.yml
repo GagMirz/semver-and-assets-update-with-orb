@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   semver: tmo-orb/semver@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
+  bats: circleci/bats@1.1.0
 
 filters: &filters
   tags:
@@ -18,6 +19,8 @@ jobs:
       - run:
           name: "Adding environment variables for tests"
           command: |
+            mkdir -p /home/circleci/
+            touch /home/circleci/.utils.config /home/circleci/.new_utils.config
             echo "export config_path='/home/circleci/.utils.config'" >> "$BASH_ENV"
 
       # SemVer update tests
@@ -255,6 +258,10 @@ workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
+      - bats/run:
+          formatter: junit
+          path: ./src/tests
+          timing: true
       - command-tests:
           filters: *filters
       - orb-tools/pack:
@@ -272,3 +279,4 @@ workflows:
               ignore: /.*/
             tags:
               only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
+

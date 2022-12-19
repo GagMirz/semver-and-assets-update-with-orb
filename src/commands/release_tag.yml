@@ -10,7 +10,7 @@ parameters:
 steps:
   - run:
       name: "Set env path"
-      command: echo "export cnfp='<< parameters.config_path >>'" >> "$BASH_ENV"
+      command: echo "export cnfp=\"<< parameters.config_path >>\"" >> "$BASH_ENV"
   - run:
       name: "Get given flag value from a string"
       command: "<< include(scripts/release_tag.sh) >>"

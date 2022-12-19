@@ -1,54 +1,77 @@
 #!/bin/bash
 
-# shellcheck disable=SC2154,SC2206,SC2236,SC1090
-# SC2206,SC2236 justification: Meaningless warning/error. 
+# shellcheck disable=SC2154,SC1090
 # SC1090 justification: file should be created outside, path is not fixed, can't specify source.
 # SC2154 justification: Variable assigned outside of script file(Depends on SC1090).
 
-[[ -f "${cnfp}" ]] && source "${cnfp}"
+#######################################
+# Increment given SemVer string with given level option
+# ARGUMENTS:
+#   SemVer string
+#   Increase option F.E. M/m/p/Mm/mp/Mp/Mmp
+# OUTPUTS:
+#   Incremented SemVer string
+# RETURN:
+#   non-zero on error
+#######################################
+semver_increment() {
+  [[ -z "${1}" ]] && exit 128
+  [[ -z "${2}" ]] && exit 129
 
-# Add default values
-[[ -z "${version}" ]] && version="v0.0.0"
-[[ -z "${option}" ]] && option="p"
-[[ -z "${answer}" ]] && answer="VERSION"
+  while read -r -n1 op; do
+    case $op in
+    M) major=true ;;
+    m) minor=true ;;
+    p) patch=true ;;
+    esac
+  done < <(echo -n "$2")
 
-while read -r -n1 op; do
-  case $op in
-    M ) major=true;;
-    m ) minor=true;;
-    p ) patch=true;;
-  esac
-done < <(echo -n "$option")
+  local a
+  local vFlag
 
-echo $major
-echo $minor
-echo $patch
+  # shellcheck disable=SC2206 # Justification: Need it to be splited to array
+  a=(${1//./ })
 
-a=( ${version//./ } )
+  if [ "${a[0]:0:1}" == "v" ]; then
+    a[0]="${a[0]:1}"
+    vFlag="v"
+  fi
 
-if [ "${a[0]:0:1}" == "v" ]; then
-  a[0]=${a[0]:1}
-  vFlag="v"
+  if [ -n "${major}" ]; then
+    ((a[0] = a[0] + 1))
+    a[1]=0
+    a[2]=0
+  fi
+
+  if [ -n "${minor}" ]; then
+    ((a[1] = a[1] + 1))
+    a[2]=0
+  fi
+
+  if [ -n "${patch}" ]; then
+    ((a[2] = a[2] + 1))
+  fi
+
+  local version
+  version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
+
+  echo "${version}"
+
+  return 0
+}
+
+# Will not run if sourced from another script.
+# This is done so this script may be tested.
+ORB_TEST_ENV="bats-core"
+if [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
+  # shellcheck source=src/scripts/utils.sh
+  source src/scripts/utils.sh
+  SourceParameters "${cnfp}"
+
+  # Add default values
+  [[ -z "${version}" ]] && version="v0.0.0"
+  [[ -z "${option}" ]] && option="p"
+  [[ -z "${answer}" ]] && answer="VERSION"
+
+  CreateAnswer "${answer}" "$(semver_increment "${version}" "${option}")"
 fi
-
-if [ ! -z $major ]; then
-  ((a[0]=a[0]+1))
-  a[1]=0
-  a[2]=0
-fi
-
-if [ ! -z $minor ]; then
-  ((a[1]=a[1]+1))
-  a[2]=0
-fi
-
-if [ ! -z $patch ]; then
-  ((a[2]=a[2]+1))
-fi
-
-version="${vFlag}${a[0]}.${a[1]}.${a[2]}"
-echo $vFlag
-echo ${a[0]}
-echo ${a[1]}
-echo ${a[2]}
-echo "export ${answer}=${version}" >> "$BASH_ENV"

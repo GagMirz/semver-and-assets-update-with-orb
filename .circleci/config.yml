@@ -21,6 +21,7 @@ workflows:
           exclude: "RC009"
       - shellcheck/check:
           filters: *filters
+          severity: warning
       - orb-tools/publish:
           orb-name: tmo-orb/semver
           vcs-type: << pipeline.project.type >>

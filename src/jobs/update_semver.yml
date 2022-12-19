@@ -24,9 +24,9 @@ steps:
           name: "Install python"
           command: apk add --no-cache python3
 
-    - release_tag
-
     - commit_message
+
+    - flag_value
 
     - when:
           condition: ${COMMIT_MESSAGE}
@@ -37,7 +37,7 @@ steps:
                         echo "text=\"${COMMIT_MESSAGE}\"" > $config_path
                         echo "flag=r" >> $config_path
 
-              - flag_value
+              - release_tag
 
               - run:
                     name: "Load parameters to env"
@@ -50,4 +50,4 @@ steps:
               - run:
                     name: "Publish Release on GitHub"
                     command: |
-                        ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} << parameters.assets_path >>
+                        ghr -t "${GITHUB_TOKEN}" -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -delete "${VERSION}" << parameters.assets_path >>
