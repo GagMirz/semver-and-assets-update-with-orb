@@ -34,25 +34,21 @@ steps:
     - flag_value
 
     - run:
-        name: "test"
+        name: "Check flag value availability"
         command: |
-            echo "${COMMIT_MESSAGE}"
-            echo "${#FLAG_VALUE}"
+            [[ $FLAG_VALUE == "" ]] && circleci-agent step halt
 
-    - when:
-          condition: ${FLAG_VALUE}
-          steps:
-              - release_tag
+    - release_tag
 
-              - run:
-                    name: "Load parameters to env"
-                    command: |
-                        echo "version=\"${TAG}\"" > $config_path
-                        echo "option=\"${FLAG_VALUE}\"" >> $config_path
-              - semver_increment
-              - steps: << parameters.create_asset >>
+    - run:
+        name: "Load parameters to env"
+        command: |
+            echo "version=\"${TAG}\"" > $config_path
+            echo "option=\"${FLAG_VALUE}\"" >> $config_path
+    - semver_increment
+    - steps: << parameters.create_asset >>
 
-              - run:
-                    name: "Publish Release on GitHub"
-                    command: |
-                        ghr -t "${GITHUB_TOKEN}" -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -delete "${VERSION}" << parameters.assets_path >>
+    - run:
+        name: "Publish Release on GitHub"
+        command: |
+            ghr -t "${GITHUB_TOKEN}" -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -delete "${VERSION}" << parameters.assets_path >>
