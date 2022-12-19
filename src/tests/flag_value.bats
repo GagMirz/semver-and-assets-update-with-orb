@@ -4,6 +4,7 @@ setup() {
     source "./src/scripts/flag_value.sh"
 }
 
+# get_flag_value()
 # 1 Should return flag value when
 @test "1.1 text given, flag given, text contains flag and value" {
     run get_flag_value "some text with -r flag" "r"
@@ -60,19 +61,19 @@ setup() {
     run get_flag_value "" "r"
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }
 
 @test "3.2 text not given, flag given" {
     run get_flag_value "some text with -t tip_flag -f fake_flag -n new_flag -m meaningless_flag" ""
 
     [ "${status}" == "129" ] # Check status to be 129
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }
 
-@test "3.2 text not given, flag not given" {
+@test "3.3 text not given, flag not given" {
     run get_flag_value "" ""
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }

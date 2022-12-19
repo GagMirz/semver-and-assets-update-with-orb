@@ -2,6 +2,7 @@ setup() {
     source "./src/scripts/commit_message.sh"
 }
 
+# get_commit_message()
 # 1 Should increment tag when
 @test "1.1 commit hash given" {
     # Main/master branch initial commit hash, assertion value should be manually updated as well
@@ -16,5 +17,5 @@ setup() {
     run get_commit_message ""
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }

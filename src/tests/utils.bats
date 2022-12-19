@@ -80,12 +80,12 @@ setup() {
     run CreateAnswer "" "variable_value"
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${option}" == "" ]    # Check nothing was given to stdout
+    [ "${option}" == "" ]    # Check stdout is clear
 }
 
 @test "5.2 variable name not given, value not given" {
     run CreateAnswer
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${option}" == "" ]    # Check nothing was given to stdout
+    [ "${option}" == "" ]    # Check stdout is clear
 }

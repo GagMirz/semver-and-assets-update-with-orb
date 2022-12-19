@@ -3,9 +3,9 @@ setup() {
     source "./src/tests/helpers.sh"
 }
 
+# get_release_tag()
 # 1 Should increment tag when
 @test "1.1 username given, repository given, token given" {
-    # Main/master branch initial commit hash, assertion value should be manually updated as well
     run get_release_tag "${CIRCLE_PROJECT_USERNAME}" "${CIRCLE_PROJECT_REPONAME}" "${GITHUB_TOKEN}"
 
     [ "${output}" != "" ]  # Initial commit message retrieved
@@ -19,17 +19,22 @@ setup() {
 
 # 2 Should throw an error when
 @test "2.1 username not given, repository given" {
-    # Main/master branch initial commit hash, assertion value should be manually updated as well
     run get_release_tag "" "${CIRCLE_PROJECT_REPONAME}"
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }
 
 @test "2.2 username given, repository not given" {
-    # Main/master branch initial commit hash, assertion value should be manually updated as well
     run get_release_tag "${CIRCLE_PROJECT_USERNAME}" ""
 
     [ "${status}" == "129" ] # Check status to be 129
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
+}
+
+@test "2.3 username not given, repository not given" {
+    run get_release_tag "" ""
+
+    [ "${status}" == "128" ] # Check status to be 129
+    [ "${output}" == "" ]    # Check stdout is clear
 }

@@ -4,6 +4,7 @@ setup() {
     source "./src/scripts/semver_increment.sh"
 }
 
+# semver_increment()
 # 1 Should increment tag when
 @test "1.1 version given, p option" {
     local option
@@ -165,44 +166,24 @@ setup() {
     [ "${status}" == "0" ]      # Check status to be 0
 }
 
-@test "1.9 version given(doesn't contain v letter), any option" {
-    local option
-    option="Mmp"
-
-    run semver_increment "0.0.0" "${option}"
-
-    [ "${output}" == "1.1.1" ] # New tag retrieved
-    [ "${status}" == "0" ]     # Check status to be 0
-
-    run semver_increment "5.5.5" "${option}"
-
-    [ "${output}" == "6.1.1" ] # New tag retrieved
-    [ "${status}" == "0" ]     # Check status to be 0
-
-    run semver_increment "10.10.10" "${option}"
-
-    [ "${output}" == "11.1.1" ] # New tag retrieved
-    [ "${status}" == "0" ]      # Check status to be 0
-}
-
 # 2 Should throw an error when
 @test "2.1 version not given, option given" {
     run semver_increment "" "m"
 
     [ "${status}" == "128" ] # Check status to be 0
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }
 
 @test "2.2 version given, option not given" {
     run semver_increment "0.0.0" ""
 
     [ "${status}" == "129" ] # Check status to be 0
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }
 
 @test "2.3 version not given, option not given" {
     run semver_increment "" ""
 
     [ "${status}" == "128" ] # Check status to be 0
-    [ "${output}" == "" ]    # Check nothing was given to stdout
+    [ "${output}" == "" ]    # Check stdout is clear
 }
