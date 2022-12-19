@@ -111,7 +111,7 @@ setup() {
 
     run semver_increment "v0.0.0" "${option}"
 
-    [ "${output}" == "v1.0.1" ] # New tag retrieved
+    [ "${output}" == "v1.1.0" ] # New tag retrieved
     [ "${status}" == "0" ]      # Check status to be 0
 
     run semver_increment "v5.5.5" "${option}"
