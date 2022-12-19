@@ -26,7 +26,7 @@ setup() {
     [ "${output}" != "" ]    # Check nothing was given to stdout
 }
 
-@test "2.1 username not given, repository given" {
+@test "2.2 username given, repository not given" {
     # Main/master branch initial commit hash, assertion value should be manually updated as well
     run get_release_tag "${CIRCLE_PROJECT_USERNAME}" ""
 
