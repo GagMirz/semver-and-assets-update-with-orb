@@ -36,6 +36,7 @@ steps:
     - run:
         name: "test"
         command: |
+            echo "${COMMIT_MESSAGE}"
             echo "${FLAG_VALUE}"
 
     - when:
