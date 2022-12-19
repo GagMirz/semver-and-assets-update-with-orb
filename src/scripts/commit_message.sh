@@ -13,6 +13,8 @@
 #   non-zero on error
 #######################################
 get_commit_message() {
+    [[ -z "${1}" ]] && exit 128
+
     local message
     message=$(git log --format=oneline -n 1 "${1}")
 
