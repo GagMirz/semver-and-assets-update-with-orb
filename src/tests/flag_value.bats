@@ -60,19 +60,19 @@ setup() {
     run get_flag_value "" "r"
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${output}" == "" ]    # Check flag value to be empty
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }
 
 @test "3.2 text not given, flag given" {
     run get_flag_value "some text with -t tip_flag -f fake_flag -n new_flag -m meaningless_flag" ""
 
     [ "${status}" == "129" ] # Check status to be 129
-    [ "${output}" == "" ]    # Check flag value to be empty
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }
 
 @test "3.2 text not given, flag not given" {
     run get_flag_value "" ""
 
     [ "${status}" == "128" ] # Check status to be 128
-    [ "${output}" == "" ]    # Check flag value to be empty
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }

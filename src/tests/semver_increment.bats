@@ -190,19 +190,19 @@ setup() {
     run semver_increment "" "m"
 
     [ "${status}" == "128" ] # Check status to be 0
-    [ "${output}" == "" ]    # New tag retrieved
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }
 
-@test "2.1 version given, option not given" {
+@test "2.2 version given, option not given" {
     run semver_increment "0.0.0" ""
 
     [ "${status}" == "129" ] # Check status to be 0
-    [ "${output}" == "" ]    # New tag retrieved
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }
 
-@test "2.1 version not given, option not given" {
+@test "2.3 version not given, option not given" {
     run semver_increment "" ""
 
     [ "${status}" == "128" ] # Check status to be 0
-    [ "${output}" == "" ]    # New tag retrieved
+    [ "${output}" == "" ]    # Check nothing was given to stdout
 }
