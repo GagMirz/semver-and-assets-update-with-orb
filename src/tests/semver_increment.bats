@@ -144,3 +144,23 @@ setup() {
     [ "${output}" == "v11.1.1" ] # New tag retrieved
     [ "${status}" == "0" ]       # Check status to be 0
 }
+
+@test "1.4 version given(doesn't contain v letter), any option" {
+    local option
+    option="Mmp"
+
+    run semver_increment "0.0.0" "${option}"
+
+    [ "${output}" == "1.1.1" ] # New tag retrieved
+    [ "${status}" == "0" ]      # Check status to be 0
+
+    run semver_increment "5.5.5" "${option}"
+
+    [ "${output}" == "6.1.1" ] # New tag retrieved
+    [ "${status}" == "0" ]      # Check status to be 0
+
+    run semver_increment "10.10.10" "${option}"
+
+    [ "${output}" == "11.1.1" ] # New tag retrieved
+    [ "${status}" == "0" ]       # Check status to be 0
+}
