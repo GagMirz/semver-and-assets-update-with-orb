@@ -31,8 +31,8 @@ get_release_tag() {
 # This is done so this script may be tested.
 ORB_TEST_ENV="bats-core"
 if [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
-    # shellcheck source=src/scripts/utils.sh
-    source src/scripts/utils.sh
+    # Import utils.
+    eval "$SCRIPT_UTILS"
     SourceParameters "${cnfp}"
 
     # Add default values

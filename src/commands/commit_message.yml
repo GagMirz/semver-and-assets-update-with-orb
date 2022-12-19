@@ -14,3 +14,5 @@ steps:
   - run:
       name: "Retrieve and set commit message to variable"
       command: "<< include(scripts/commit_message.sh) >>"
+      environment:
+        SCRIPT_UTILS: "<<include(scripts/utils.sh)>>"
