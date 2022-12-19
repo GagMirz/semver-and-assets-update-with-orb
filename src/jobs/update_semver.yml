@@ -36,7 +36,7 @@ steps:
     - run:
         name: "Check flag value availability"
         command: |
-            [[ $FLAG_VALUE == "" ]] && circleci-agent step halt
+            [[ $FLAG_VALUE == "" ]] && $(circleci-agent step halt)
 
     - release_tag
 
