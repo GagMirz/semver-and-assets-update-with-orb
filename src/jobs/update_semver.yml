@@ -34,7 +34,7 @@ steps:
     - flag_value
 
     - when:
-          condition: ${COMMIT_MESSAGE}
+          condition: ${FLAG_VALUE}
           steps:
               - release_tag
 
